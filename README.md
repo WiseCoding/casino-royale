@@ -1,6 +1,6 @@
 # Casine Royal 🎲
 
-[**Latest Version 👀**](https://wisecoding.github.io/casino-royale/)
+[**Live Version**](https://wisecoding.github.io/casino-royale/)
 
 # Assignment 📝
 
@@ -32,7 +32,7 @@
 - [👨🏽‍💻Victor](https://github.com/ortegaVictorBe)
 - [👩🏽‍💻Raluca](https://github.com/RalucaElisabetaR)
 - [👨🏼‍💻Mattias](https://github.com/WiseCoding/)
-- [👩🏽‍💻Ouna](https://github.com/Ouna-Bilegma)
+- [👩🏽‍💻Oiuna](https://github.com/Ouna-Bilegma)
 - [👨🏽‍💻Mausam](https://github.com/ErAsuratya)
 
 # Built with 🛠
@@ -46,14 +46,26 @@
 MIT License
 MIT © 2020
 
-# History 🔎
+# Project Management 🔎
 
-## What
+## [Jira Board](https://js-monks.atlassian.net/jira/software/projects/CR/boards/1)
 
-## Why
+---
 
-## When
+### WHAT:
 
-## How
+---
 
-## Who
+### WHY:
+
+---
+
+### WHEN:
+
+---
+
+### HOW:
+
+---
+
+### WHO:
