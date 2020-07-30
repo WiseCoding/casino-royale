@@ -1,6 +1,6 @@
 # Casine Royal 🎲
 
-[**Live Version**](https://wisecoding.github.io/casino-royale/)
+[**Live Version**](https://wisecoding.github.io/casino-royale/) - [Agile](https://js-monks.atlassian.net/jira/software/projects/CR/boards/1)
 
 # Assignment 📝
 
