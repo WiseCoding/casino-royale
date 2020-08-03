@@ -39,12 +39,11 @@
 
     <!-- MAIN -->
     <main>
-      <!-- CARD GRID -->
-      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 px-6 py-10">
-        <!-- CARD 1 -->
+      <!-- COMPUTER PICK -->
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 m-6">
         <div
-          title="Choose Rock"
-          class="bg-white overflow-hidden overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          title="Computer's Choice"
+          class="sm:col-span-2 md:col-start-2 md:col-span-2 lg:col-start-2 lg:col-span-3 bg-gray-700 overflow-hidden shadow rounded-lg"
         >
           <div class="px-4 py-5 sm:p-6">
             <img
@@ -53,7 +52,29 @@
               alt="Hand doing a rock gesture"
             />
           </div>
-          <div class="border-t border-gray-200 px-4 py-4 sm:px-6 text-center">
+          <div class="px-4 py-4 sm:px-6 text-center text-white">
+            <p>ROCK</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD GRID -->
+      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 m-6">
+        <!-- CARD 1 -->
+        <div
+          title="Choose Rock"
+          class="group bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+        >
+          <div class="px-4 py-5 sm:p-6 hidden sm:block">
+            <img
+              class="object-contain w-full h-32"
+              src="../images/1-rpsls/Rock.svg"
+              alt="Hand doing a rock gesture"
+            />
+          </div>
+          <div
+            class="border-t border-gray-200 group-hover:border-yellow-500 px-4 py-4 sm:px-6 text-center"
+          >
             <p>ROCK</p>
           </div>
         </div>
@@ -61,9 +82,9 @@
         <!-- CARD 2 -->
         <div
           title="Choose Paper"
-          class="bg-white overflow-hidden overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
-          <div class="px-4 py-5 sm:p-6">
+          <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
               class="object-contain w-full h-32"
               src="../images/1-rpsls/Paper.svg"
@@ -78,9 +99,9 @@
         <!-- CARD 3 -->
         <div
           title="Choose Scissors"
-          class="bg-white overflow-hidden overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
-          <div class="px-4 py-5 sm:p-6">
+          <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
               class="object-contain w-full h-32"
               src="../images/1-rpsls/Scissor.svg"
@@ -95,9 +116,9 @@
         <!-- CARD 4 -->
         <div
           title="Choose Lizard"
-          class="bg-white overflow-hidden overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
-          <div class="px-4 py-5 sm:p-6">
+          <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
               class="object-contain w-full h-32"
               src="../images/1-rpsls/Lizard.svg"
@@ -112,9 +133,9 @@
         <!-- CARD 5 -->
         <div
           title="Choose Spock"
-          class="bg-white overflow-hidden overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
-          <div class="px-4 py-5 sm:p-6">
+          <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
               class="object-contain w-full h-32"
               src="../images/1-rpsls/Spock.svg"
