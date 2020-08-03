@@ -1,10 +1,10 @@
-function getInfo(){
-    var getInfo = {
-     "data1": name,
-     "data2": credit,
-     "data3": prize,
-    }
-    localStorage.getItem(getInfo);
+function getInfo() {
+  var getInfo = {
+    data1: name,
+    data2: credit,
+    data3: prize,
+  };
+  localStorage.getItem(getInfo);
 }
 
 // function getName(){
@@ -17,25 +17,29 @@ function getInfo(){
 // }
 //    else {
 
-//    } 
+//    }
 
-   
-function getName(){
-    var user_name = 'username';
-    var user_credit='credit';
-  
-    var player = localStorage.getItem(user_name);
-    if(!player) {
+function getName() {
+  var user_name = "username";
+  var user_credit = "credit";
+
+  var player = localStorage.getItem(user_name);
+  if (!player) {
     player = prompt("Please enter your name");
     localStorage.setItem(user_name, player);
     localStorage.setItem(user_credit, 100);
-  
-  }
-   else {
-     var credit = localStorage.getItem(user_credit);
-     document.getElementById("credits").innerHTML = credit;
-     document.getElementById("credits").style.color= "white";
+  } else {
+    var credit = localStorage.getItem(user_credit);
+    document.getElementById("credits").innerHTML = credit;
+    document.getElementById("credits").style.color = "white";
     //  alert(`Player ${player} is logged`);
-   }
   }
-  getName() 
+}
+
+function getCredit() {
+  return localStorage.getItem("credit");
+}
+function setCredit(credit) {
+  localStorage.setItem("credit", credit);
+}
+getName();
