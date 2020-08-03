@@ -42,18 +42,23 @@
       <!-- COMPUTER PICK -->
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 m-6">
         <div
+          id="computerDiv"
           title="Computer's Choice"
-          class="sm:col-span-2 md:col-start-2 md:col-span-2 lg:col-start-2 lg:col-span-3 bg-gray-700 overflow-hidden shadow rounded-lg"
+          class="sm:col-span-2 md:col-start-2 md:col-span-2 lg:col-start-2 lg:col-span-3 bg-gray-800 overflow-hidden shadow rounded-lg"
         >
+          <div class="px-4 py-4 sm:px-6 text-center text-white">
+            <p id="gameState">Shaking...</p>
+          </div>
           <div class="px-4 py-5 sm:p-6">
             <img
+              id="computerImage"
               class="object-contain w-full h-32"
-              src="../images/1-rpsls/Rock.svg"
+              src="../images/1-rpsls/Start.svg"
               alt="Hand doing a rock gesture"
             />
           </div>
           <div class="px-4 py-4 sm:px-6 text-center text-white">
-            <p>ROCK</p>
+            <p id="computerChoice">•••Make a choice•••</p>
           </div>
         </div>
       </div>
@@ -62,8 +67,9 @@
       <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 m-6">
         <!-- CARD 1 -->
         <div
+          id="rock"
           title="Choose Rock"
-          class="group bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="card bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
           <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
@@ -72,17 +78,16 @@
               alt="Hand doing a rock gesture"
             />
           </div>
-          <div
-            class="border-t border-gray-200 group-hover:border-yellow-500 px-4 py-4 sm:px-6 text-center"
-          >
+          <div class="border-t border-gray-200 px-4 py-4 sm:px-6 text-center">
             <p>ROCK</p>
           </div>
         </div>
 
         <!-- CARD 2 -->
         <div
+          id="paper"
           title="Choose Paper"
-          class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="card bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
           <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
@@ -98,13 +103,14 @@
 
         <!-- CARD 3 -->
         <div
+          id="scissors"
           title="Choose Scissors"
-          class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="card bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
           <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
               class="object-contain w-full h-32"
-              src="../images/1-rpsls/Scissor.svg"
+              src="../images/1-rpsls/Scissors.svg"
               alt="Hand doing a scissors gesture"
             />
           </div>
@@ -115,8 +121,9 @@
 
         <!-- CARD 4 -->
         <div
+          id="lizard"
           title="Choose Lizard"
-          class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
+          class="card bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >
           <div class="px-4 py-5 sm:p-6 hidden sm:block">
             <img
@@ -132,6 +139,7 @@
 
         <!-- CARD 5 -->
         <div
+          id="spock"
           title="Choose Spock"
           class="bg-white overflow-hidden shadow border rounded-lg hover:shadow-lg hover:border-yellow-500"
         >

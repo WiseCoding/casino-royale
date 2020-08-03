@@ -17,7 +17,6 @@
 - The virtual casino will host 2-4 games
 - The home page has, for each game, a "card" that will link to it
 - From the games I can always go back to the home page, or directly to one of the other games
-- The full description of each game is found here
 - The whole website must have a coordinated design/image (don't use saturated reds and square corners on one page, but pastel colors and rounded corners on another)
 - MUST HAVE GAMES: Rock, Paper, Scissors, Lizard, Spock and Twenty-One
 
@@ -30,10 +29,10 @@
 # The Team 👥
 
 - [👨🏽‍💻Victor](https://github.com/ortegaVictorBe)
-- [👩🏽‍💻Raluca](https://github.com/RalucaElisabetaR)
+- [👩🏻‍💻Raluca](https://github.com/RalucaElisabetaR)
 - [👨🏼‍💻Mattias](https://github.com/WiseCoding/)
-- [👩🏽‍💻Oiuna](https://github.com/Ouna-Bilegma)
-- [👨🏽‍💻Mausam](https://github.com/ErAsuratya)
+- [👩🏻‍💻Oiuna](https://github.com/Ouna-Bilegma)
+- [👨🏻‍💻Mausam](https://github.com/ErAsuratya)
 
 # Built with 🛠
 
