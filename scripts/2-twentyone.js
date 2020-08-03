@@ -26,7 +26,7 @@
                 theDeck[theDeck.length] = { stick: card.stick[i], icon: card.icon[i], figure: card.figure[j], value: card.value[j] }
             }
         }
-        return theDeck;
+        // return theDeck;
     }
 
     //card -object -Method : mixer -- unsort cards
@@ -37,7 +37,7 @@
     }
 
     //Execution Secuence
-    theDeck = card.getDeck();
+    theDeck = card.getDeck(theDeck);
     console.table(theDeck);
     //    console.log(randomCard());
 

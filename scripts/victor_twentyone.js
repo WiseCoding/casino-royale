@@ -1,48 +1,47 @@
 
 
 (() => {
-    //Deck of cards
-    var theDeck = [];
-    var logs = false;
-    var deck = {
-        stick: ["hearts", "spades", "spikes", "diamond"],
-        icon: ["♥", "♠", "♣", "♦"],
-        figure: ["A", "02", "03", "04", "05", "06", "07", "08", "09", "10", "J", "Q", "K"],
-        value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+    //     //Deck of cards
+    //     var theDeck = [];
+    //     var logs = false;
+    //     var deck = {
+    //         stick: ["hearts", "spades", "spikes", "diamond"],
+    //         icon: ["♥", "♠", "♣", "♦"],
+    //         figure: ["A", "02", "03", "04", "05", "06", "07", "08", "09", "10", "J", "Q", "K"],
+    //         value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
-    };
+    //     };
 
-    //Generate some random option for machine
-    generator = (min, max) => {
-        let rndNumber = Math.floor(Math.random() * (max - min + 1) + min);
-        return rndNumber;
-    }
+    //     //Generate some random option for machine
+    //     generator = (min, max) => {
+    //         let rndNumber = Math.floor(Math.random() * (max - min + 1) + min);
+    //         return rndNumber;
+    //     }
 
-    // Building Object methods --deck--
-    //Creating the Deck
-    deck.getDeck = (theDeck) => {
+    //     // Building Object methods --deck--
+    //     //Creating the Deck
+    //     deck.getDeck = (theDeck) => {
 
-        for (var i = 0; i < deck.stick.length; i++) {
-            for (var j = 0; j < deck.figure.length; j++) {
-                theDeck[theDeck.length] = { stick: deck.stick[i], icon: deck.icon[i], figure: deck.figure[j], value: deck.value[j] }
-            }
-        }
-        return theDeck;
-    }
-    //Picking randomly a Card 
-    deck.randomCard = (theDeck) => {
-        var randomCard = generator(51, 0);
-        return theDeck[randomCard];
-    }
-    deck.getCard = (theDeck, id) => {
-        return theDeck[id];
+    //         for (var i = 0; i < deck.stick.length; i++) {
+    //             for (var j = 0; j < deck.figure.length; j++) {
+    //                 theDeck[theDeck.length] = { stick: deck.stick[i], icon: deck.icon[i], figure: deck.figure[j], value: deck.value[j] }
+    //             }
+    //         }
+    //         return theDeck;
+    //     }
+    //     //Picking randomly a Card 
+    //     deck.randomCard = (theDeck) => {
+    //         var randomCard = generator(51, 0);
+    //         return theDeck[randomCard];
+    //     }
+    //     deck.getCard = (theDeck, id) => {
+    //         return theDeck[id];
 
-    }
+    //     }
+    //     deck.view = (viewCard) => {
 
-    deck.view = (viewCard) => {
-
-        console.log("Carta: " + viewCard.stick + viewCard.figure + "; Valor: " + viewCard.value + " .");
-    }
+    //         console.log("Carta: " + viewCard.stick + viewCard.figure + "; Valor: " + viewCard.value + " .");
+    //     }
     //End Object deck
     //dealer -object
     var objDealer = {};
