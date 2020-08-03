@@ -39,4 +39,5 @@ function getCredit() {
   var score = 100;
 
 }
-  
+  functions 
+  1 to add credits other for take credits 

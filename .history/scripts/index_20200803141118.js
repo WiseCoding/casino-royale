@@ -29,7 +29,6 @@ function getName(){
    var credit = localStorage.getItem(user_credit);
    document.getElementById("credits").innerHTML = credit;
    document.getElementById("credits").style.color= "white";
-   document.getElementById("userName").innerHTML= player;
   //  alert(`Player ${player} is logged`);
  }
 }
@@ -39,4 +38,5 @@ function getCredit() {
   var score = 100;
 
 }
-  
+  functions 
+  1 to add credits other for take credits 
