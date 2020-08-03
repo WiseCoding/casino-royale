@@ -12,20 +12,19 @@ document.querySelector("#card4").onclick = () => {
   window.location = "html/4-blocks.html";
 };
 
-function getName() {
-  var user_name = "username";
-  var user_credit = "credit";
-
-  var player = localStorage.getItem(user_name);
+function getInfo() {
+  var player = localStorage.getItem("username");
   if (!player) {
     player = prompt("Please enter your name");
     document.getElementById("userName").innerHTML = player;
-    localStorage.setItem(user_name, player);
-    localStorage.setItem(user_credit, 100);
+    localStorage.setItem("username", player);
+    localStorage.setItem("credit", 100);
   } else {
-    var credit = localStorage.getItem(user_credit);
-    document.getElementById("credits").innerHTML = credit;
+    document.getElementById("credits").innerHTML = localStorage.getItem(
+      "credit"
+    );
     document.getElementById("credits").style.color = "white";
+
     document.getElementById("userName").innerHTML = player;
     //  alert(`Player ${player} is logged`);
   }
@@ -39,4 +38,4 @@ function setCredit(credit) {
   localStorage.setItem("credit", credit);
 }
 
-getName();
+getInfo();
