@@ -20,14 +20,14 @@ function getName(){
   var player = localStorage.getItem(user_name);
   if(!player) {
   player = prompt("Please enter your name");
-  localStorage.setItem(user_name, player);
-  localStorage.setItem(user_credit, 100);
+  localStorage.setItem('user_name', player);
+  localStorage.setItem('credit', 100);
 
 }
  else {
-   var credit = localStorage.getItem(user_credit);
+   var credit = localStorage.getItem('user_credit');
    document.getElementById("credits").innerHTML = credit;
-   document.getElementById("credits").style.color= "white";
+   document.getElementById("credits").style.color= white;
   //  alert(`Player ${player} is logged`);
  }
 }

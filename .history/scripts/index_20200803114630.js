@@ -25,7 +25,7 @@ function getName(){
 
 }
  else {
-   var credit = localStorage.getItem(user_credit);
+   var credit = localStorage.getItem('user_credit');
    document.getElementById("credits").innerHTML = credit;
    document.getElementById("credits").style.color= "white";
   //  alert(`Player ${player} is logged`);
