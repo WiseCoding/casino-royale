@@ -20,7 +20,6 @@ function getName(){
   var player = localStorage.getItem(user_name);
   if(!player) {
   player = prompt("Please enter your name");
-  document.getElementById("userName").innerHTML= player;
   localStorage.setItem(user_name, player);
   localStorage.setItem(user_credit, 100);
 
@@ -29,14 +28,11 @@ function getName(){
    var credit = localStorage.getItem(user_credit);
    document.getElementById("credits").innerHTML = credit;
    document.getElementById("credits").style.color= "white";
-   document.getElementById("userName").innerHTML= player;
   //  alert(`Player ${player} is logged`);
  }
 }
 getName() 
   
-function getCredit() {
-  var score = 100;
 
-}
-  
+  functions 
+  1 to add credits other for take credits 
