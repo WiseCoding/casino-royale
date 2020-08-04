@@ -71,7 +71,7 @@
     document.querySelector('#gameState').textContent = `${outcome}`;
     document.querySelector(
       '#computerImage'
-    ).src = `../images/1-rpsls/${playerChoice}.svg`;
+    ).src = `../images/1-rpsls/${computerChoice}.svg`;
     document.querySelector('#computerChoice').textContent = `${choice}`;
 
     switch (outcome) {
