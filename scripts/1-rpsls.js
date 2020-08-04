@@ -69,7 +69,9 @@
 
     // SET COMPUTER HTML
     document.querySelector('#gameState').textContent = `${outcome}`;
-    document.querySelector('#computerImage').src = `../images/1-rpsls/${choice}.svg`;
+    document.querySelector(
+      '#computerImage'
+    ).src = `../images/1-rpsls/${playerChoice}.svg`;
     document.querySelector('#computerChoice').textContent = `${choice}`;
 
     switch (outcome) {
