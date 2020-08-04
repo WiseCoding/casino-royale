@@ -29,9 +29,8 @@
 # The Team 👥
 
 - [👨🏽‍💻Victor](https://github.com/ortegaVictorBe)
-- [👩🏻‍💻Raluca](https://github.com/RalucaElisabetaR)
-- [👨🏼‍💻Mattias](https://github.com/WiseCoding/)
 - [👩🏻‍💻Oiuna](https://github.com/Ouna-Bilegma)
+- [👨🏼‍💻Mattias](https://github.com/WiseCoding/)
 - [👨🏻‍💻Mausam](https://github.com/ErAsuratya)
 
 # Built with 🛠
@@ -48,6 +47,8 @@ MIT © 2020
 # Project Management 🔎
 
 ## [Jira Board](https://js-monks.atlassian.net/jira/software/projects/CR/boards/1)
+
+## [GitHub Projects](https://github.com/WiseCoding/casino-royale/projects/1)
 
 ---
 
