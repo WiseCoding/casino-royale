@@ -51,9 +51,6 @@
       case 'Spock':
         choice = 'SPOCK';
         break;
-      default:
-        console.log('A wild error appeared :(');
-        break;
     }
 
     let outcome;
@@ -74,7 +71,7 @@
     document.querySelector('#gameState').textContent = `${outcome}`;
     document.querySelector('#computerImage').src = `../images/1-rpsls/${choice}.svg`;
     document.querySelector('#computerChoice').textContent = `${choice}`;
-    // W-L-D
+
     switch (outcome) {
       case 'WIN':
         // Add Color
@@ -88,7 +85,7 @@
             .querySelector(`#${playerChoice.toLowerCase()}`)
             .classList.remove('bg-green-500');
           document.querySelector(`#computerDiv`).classList.remove('bg-green-500');
-        }, 1000);
+        }, 1500);
         break;
 
       case 'LOSS':
@@ -103,7 +100,7 @@
             .querySelector(`#${playerChoice.toLowerCase()}`)
             .classList.remove('bg-red-500');
           document.querySelector(`#computerDiv`).classList.remove('bg-red-500');
-        }, 1000);
+        }, 1500);
         break;
 
       case 'DRAW':
@@ -122,7 +119,7 @@
           document.querySelector(`#computerDiv`).classList.remove('bg-yellow-500');
           document.querySelector(`#gameState`).classList.remove('text-black');
           document.querySelector(`#computerChoice`).classList.remove('text-black');
-        }, 1000);
+        }, 1500);
         break;
     }
 
@@ -160,6 +157,4 @@
     let machineOption = generator(0, 4);
     game(userOption, machineOption);
   };
-
-  //
 })();
