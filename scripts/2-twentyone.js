@@ -13,7 +13,7 @@
     //******** Creating the object Card, that will be contain  the deck********
     //object:card
     var card = {
-        stick: ["hearts", "spades", "spikes", "diamonds"],
+        stick: ["heart", "spade", "club", "diamond"],
         icon: ["♥", "♠", "♣", "♦"],
         figure: ["A", "02", "03", "04", "05", "06", "07", "08", "09", "10", "J", "Q", "K"],
         value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -24,7 +24,7 @@
         for (var i = 0; i < card.stick.length; i++) {
             // console.log("Enter first for")
             for (var j = 0; j < card.figure.length; j++) {
-                theDeck[theDeck.length] = { stick: card.stick[i], icon: card.icon[i], figure: card.figure[j], value: card.value[j] }
+                theDeck[theDeck.length] = { stick: card.stick[i], icon: card.icon[i], figure: card.figure[j], value: card.value[j], pic: `../images/2-twentyone/${card.stick}_${card.figure}.svg` }
             }
         }
     }
