@@ -7,5 +7,5 @@
 }
 
 .memoryCards {
-  @apply bg-black border rounded-lg text-white m-2 p-2;
+  @apply border rounded-lg bg-black text-white m-2 p-2;
 }
