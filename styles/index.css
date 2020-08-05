@@ -18056,6 +18056,19 @@ video {
   line-height: 1.25rem;
 }
 
+.memoryCards {
+  --bg-opacity: 1;
+  background-color: #000;
+  background-color: rgba(0, 0, 0, var(--bg-opacity));
+  border-width: 1px;
+  border-radius: 0.5rem;
+  --text-opacity: 1;
+  color: #fff;
+  color: rgba(255, 255, 255, var(--text-opacity));
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
