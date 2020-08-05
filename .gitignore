@@ -4,3 +4,5 @@
 
 #MACOS
 *.DS_store
+#custom workspaces
+scripts/victor*.*

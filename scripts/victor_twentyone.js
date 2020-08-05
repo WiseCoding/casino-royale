@@ -44,115 +44,115 @@
     //     }
     //End Object deck
     //dealer -object
-    var objDealer = {};
-    objDealer.hand = [];
-    objDealer.bust = false;
+    // var objDealer = {};
+    // objDealer.hand = [];
+    // objDealer.bust = false;
 
-    // - mixer : unsort cards
-    objDealer.mixer = function (theInnerDeck) {
-        var min = 0;
-        var max = theInnerDeck.length - 1;
-        var tmpCard = [];
-        // Mixing 300 times  
-        console.table(theInnerDeck)
-        for (var i = 0; i < 100; i++) {
-            var n1card = generator(min, max);
-            var n2card = generator(min, max);
-            console.log(`n1Card ${n1card} n2Card ${n2card}`)
-            // changing cards
-            tmpCard[0] = theInnerDeck[n1card];
-            theInnerDeck[n1card] = theInnerDeck[n2card];
-            theInnerDeck[n2card] = theInnerDeck[0];
-        };
-        console.table(theInnerDeck)
-        return theInnerDeck;
-    };  // End- mixer : unsort cards
+    // // - mixer : unsort cards
+    // objDealer.mixer = function (theInnerDeck) {
+    //     var min = 0;
+    //     var max = theInnerDeck.length - 1;
+    //     var tmpCard = [];
+    //     // Mixing 300 times  
+    //     console.table(theInnerDeck)
+    //     for (var i = 0; i < 100; i++) {
+    //         var n1card = generator(min, max);
+    //         var n2card = generator(min, max);
+    //         console.log(`n1Card ${n1card} n2Card ${n2card}`)
+    //         // changing cards
+    //         tmpCard[0] = theInnerDeck[n1card];
+    //         theInnerDeck[n1card] = theInnerDeck[n2card];
+    //         theInnerDeck[n2card] = theInnerDeck[0];
+    //     };
+    //     console.table(theInnerDeck)
+    //     return theInnerDeck;
+    // };  // End- mixer : unsort cards
     //    - ThrowCard - Deliver a card and remove it from the deck 
-    objDealer.throwCards = function (theDeck) {
-        var min = 0;
-        var max = theDeck.length - 1;
-        var card = {};
+    // objDealer.throwCards = function (theDeck) {
+    //     var min = 0;
+    //     var max = theDeck.length - 1;
+    //     var card = {};
 
-        if (theDeck.length > 0) {
-            var n1Card = generator(min, max);
-            card = theDeck[n1Card];
-            // Removing the card throwed
-            theDeck.splice(n1Card, 1);
-            if (logs) {
-                console.log("(Mixin) Card Throwed: " + card.stick + card.figure + theDcardeck.value);
-            };
-        }
-        else {
-            console.log("Deck empty, Start propertly the game");
-        };
-        return (card);
-    };  //    End- ThrowCard - Deliver a card and remove it from the deck 
+    //     if (theDeck.length > 0) {
+    //         var n1Card = generator(min, max);
+    //         card = theDeck[n1Card];
+    //         // Removing the card throwed
+    //         theDeck.splice(n1Card, 1);
+    //         if (logs) {
+    //             console.log("(Mixin) Card Throwed: " + card.stick + card.figure + theDcardeck.value);
+    //         };
+    //     }
+    //     else {
+    //         console.log("Deck empty, Start propertly the game");
+    //     };
+    //     return (card);
+    // };  //    End- ThrowCard - Deliver a card and remove it from the deck 
 
-    //    - valorar: devuelve el valor de la mano (cartas del jugador).
-    objDealer.value = function (hand, isA) {
-        return hand.reduce((tot, oneCard) => {
-            if (isA == 1 && oneCard.value == 1) { return tot + 11 } else { return tot + oneCard.value; }
-        }, 0)
-    };  // end function
+    // //    - valorar: devuelve el valor de la mano (cartas del jugador).
+    // objDealer.value = function (hand, isA) {
+    //     return hand.reduce((tot, oneCard) => {
+    //         if (isA == 1 && oneCard.value == 1) { return tot + 11 } else { return tot + oneCard.value; }
+    //     }, 0)
+    // };  // end function
     //    - evaluar: determina si según la mano, se ssigue jugando o se planta.
-    objDealer.evaluate = function (handPlayed) {
+    // objDealer.evaluate = function (handPlayed) {
 
-        var risk = 0;
-        var risk1 = 0;
-        // var posneg = true;
-        var handValue = 0;
-        var handValueA = 0;
-        var swplantar = true;
+    //     var risk = 0;
+    //     var risk1 = 0;
+    //     // var posneg = true;
+    //     var handValue = 0;
+    //     var handValueA = 0;
+    //     var swplantar = true;
 
-        // Obtenemos el valor de la manoa jugada.
-        handValue = this.value(handPlayed, 0);
-        handValueA = this.value(handPlayed, 1);
-        if (logs) {
-            console.log("ValorMano: " + valormano + ".");
-            console.log("ValorManoAs: " + valormanoas + ".");
-        };
+    //     // Obtenemos el valor de la manoa jugada.
+    //     handValue = this.value(handPlayed, 0);
+    //     handValueA = this.value(handPlayed, 1);
+    //     if (logs) {
+    //         console.log("ValorMano: " + valormano + ".");
+    //         console.log("ValorManoAs: " + valormanoas + ".");
+    //     };
 
-        // Añadimos "cierto" grado de riesgo para plantarnos.
-        risk = 21 - handValue;
-        risk1 = 21 - handValueA;
-        if (logs) {
-            console.log("Riesgo: " + riesgo + ".");
-            console.log("Riesgo1: " + riesgo1 + ".");
-        };
+    //     // Añadimos "cierto" grado de riesgo para plantarnos.
+    //     risk = 21 - handValue;
+    //     risk1 = 21 - handValueA;
+    //     if (logs) {
+    //         console.log("Riesgo: " + riesgo + ".");
+    //         console.log("Riesgo1: " + riesgo1 + ".");
+    //     };
 
-        // Si ha obtenido 21 exactos, nos plantamos.
-        if (risk == 0 || risk1 == 0) {
-            swplantar = true;
-        }
-        else {
-            // Si nos pasamos ( 21 - 23 = -2:  "< 0")
-            if (risk < 0 || risk1 < 0) {
-                swplantar = true;
-            }
-            else {
-                // Si nos aproximamos a 21 en hasta cinco unidades, nos plantamos.
-                if ((risk > 0 && risk <= 5) || (risk1 > 0 && risk1 <= 5)) {
-                    swplantar = true;
-                }
-                else {
-                    swplantar = false;
-                };
-            };
-        };
-        if (logs) {
-            console.log("SwPlantar: " + swplantar + ".");
-        };
+    //     // Si ha obtenido 21 exactos, nos plantamos.
+    //     if (risk == 0 || risk1 == 0) {
+    //         swplantar = true;
+    //     }
+    //     else {
+    //         // Si nos pasamos ( 21 - 23 = -2:  "< 0")
+    //         if (risk < 0 || risk1 < 0) {
+    //             swplantar = true;
+    //         }
+    //         else {
+    //             // Si nos aproximamos a 21 en hasta cinco unidades, nos plantamos.
+    //             if ((risk > 0 && risk <= 5) || (risk1 > 0 && risk1 <= 5)) {
+    //                 swplantar = true;
+    //             }
+    //             else {
+    //                 swplantar = false;
+    //             };
+    //         };
+    //     };
+    //     if (logs) {
+    //         console.log("SwPlantar: " + swplantar + ".");
+    //     };
 
-        return swplantar;
-    };  // fin function
+    //     return swplantar;
+    // };  // fin function
     //end dealer object
     // Definimos el objeto "objJugador", con tres funciones:
     // Solo con dos variables:
     //    - mano (array): contendrá las cartas que vaya recogiendo en cada mano.
     //    - planta (booleano): determinará si el jugador sigue pidiendo cartas o se planta.
-    var objPlayer = {};
-    objPlayer.hand = [];
-    objPlayer.bust = false;
+    // var objPlayer = {};
+    // objPlayer.hand = [];
+    // objPlayer.bust = false;
     // ------------------------------------------------------------- FIN objJugador -------//
 
     //--------------------------------------------------------------------------------------PRINCIPAL
@@ -284,7 +284,7 @@
         // tanto valoradas en modo normal como en "suave" (AS con valor 11).
         if (ganajug && ganacru) {
             // Ambos son posibles ganadores, lo determinar el valor de la mano.
-            if ((totJugador >= totCrupier || totJugadorAs >= totCrupier)
+            if ((totJugador >= totCrupier || totJugadorAs >= totCrupierAS)
                 && (totCrupier != 21 && totCrupierAs != 21)) {
                 strGanador = "Jugador ( [" + totJugador + "/" + totJugadorAs +
                     "] ) mayor/igual que Crupier ( [" + totCrupier + "/" + totCrupierAs + "] )";
