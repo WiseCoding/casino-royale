@@ -22,17 +22,23 @@
     //card -object -Method : getDeck -- Creating the Deck
     card.getDeck = (theDeck) => {
         for (var i = 0; i < card.stick.length; i++) {
-            // console.log("Enter first for")
             for (var j = 0; j < card.figure.length; j++) {
-                theDeck[theDeck.length] = { stick: card.stick[i], icon: card.icon[i], figure: card.figure[j], value: card.value[j], pic: `../images/2-twentyone/${card.stick}_${card.figure}.svg` }
+                theDeck[theDeck.length] = { stick: card.stick[i], icon: card.icon[i], figure: card.figure[j], value: card.value[j], pic: `../images/2-twentyone/${card.stick[i]}_${card.figure[j]}.svg` }
             }
         }
     }
 
     //card -object -Method : view -- returns the card info
-    card.view = (viewCard) => {
-        console.log("Card: " + viewCard.stick + viewCard.figure + "; Valor: " + viewCard.value + " .");
-        //here could be the fuction for pint the card in screen
+    card.paintCard = (viewCard, nodeFather, cardCover) => {
+        let node = document.getElementById(nodeFather);
+        let imgCard = document.createElement("img");
+
+        //setting the card
+        if (cardCover == 1) { imgCard.src = "../images/2-twentyone/cardCover.jpg" } else { imgCard.src = viewCard.pic }
+        imgCard.style.padding = "5px";
+        imgCard.style.display = "block"
+        //Append Card
+        node.appendChild(imgCard)
     }
     //END object:card
 
@@ -176,6 +182,19 @@
         //impresion de prueba
         console.log("Player Hand")
         console.table(player.hand)
+
+        player.hand.forEach(hand => {
+            card.paintCard(hand, "cardsPlayer", 0);
+
+        })
+
+        house.hand.forEach(hand => {
+            // card.paintCard(hand, "cardsHouse", 1);
+            card.paintCard(hand, "cardsHouse", 0);
+
+        })
+
+
         // console.table(`holdOn=${player.holdOn}; winner=${player.winner}`);
 
         console.log("House Hand")
@@ -184,7 +203,7 @@
 
         console.log(`PLAYER: points=${player.points}; points As=${player.pointsA} `)
         console.log(`HOUSE: points=${house.points}; points As=${house.pointsA} `)
-        // console.log(`PLAYER: winner=${player.winner}; HOUSE winne=${house.winner}`)
+        console.log(`PLAYER: winner=${player.winner}; HOUSE winne=${house.winner}`)
         //impresion prueba
 
         //Selecting the winner
@@ -204,13 +223,16 @@
                 //player wins
                 player.winner = true;
                 house.winner = false;
+
                 console.log("Player Wins #1")
+                document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Win" + "You Earned <strong>100</strong> Credits"
                 //sum the points 50
 
             } else {
                 //house wins
                 house.winner = true;
                 player.winner = false;
+                document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins" + "You lost <strong>100</strong> Credits"
                 console.log("House Wins #2")
             }
         } else {
@@ -221,14 +243,18 @@
                 house.player = false
 
                 console.log("Both loose")
+                document.getElementById("result").innerHTML = "<strong>BOTH</strong> Loose :(" + "You lost <strong>100</strong> Credits"
             }
             else {
                 if (player.winner) {
                     house.winner = false;
+                    document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Win" + "You Earned <strong>100</strong> Credits"
                     console.log("Player Wins #3")
+
                 } else {
                     player.winner = false;
                     console.log("House Wins #4")
+                    document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins" + "You lost <strong>100</strong> Credits"
                 }
 
             }
