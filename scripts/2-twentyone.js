@@ -37,8 +37,8 @@
         //setting the card
         if (cardCover == 1) { imgCard.src = "../images/2-twentyone/cardCover.jpg" } else { imgCard.src = viewCard.pic }
         imgCard.id = `${viewCard.stick}_${viewCard.figure}`;
-        imgCard.style.width = "30%"
-        imgCard.style.height = "auto"
+        imgCard.style.width = "170px"
+        imgCard.style.height = "200px"
         imgCard.style.padding = "5px";
         imgCard.style.display = "inline-block"
         //Append Card
