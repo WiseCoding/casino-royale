@@ -92,7 +92,43 @@
     </div>
 
     <!-- MAIN -->
-    <main></main>
+    <main>
+      <div
+        id="container"
+        style="display: flex; align-self: center; justify-content: center;"
+      >
+        <div id="house" style="padding: 50px;">
+          <h2 style="font-weight: 700; text-align: center;">HOUSE</h2>
+          <div id="cardsHouse"></div>
+        </div>
+        <div id="command" style="padding: 50px; text-align: center;">
+          <h2>Ready to Play.. press the button</h2>
+          <div>
+            <button
+              id="btnPlay"
+              style="
+                background-color: red;
+                color: white;
+                border-radius: 5px;
+                padding-left: 50px;
+                padding-right: 50px;
+              "
+            >
+              Play
+            </button>
+            <p id="result"></p>
+          </div>
+        </div>
+        <div id="player" style="padding: 50px;">
+          <h2 style="font-weight: 700; text-align: center;">PLAYER</h2>
+          <div id="cardsPlayer"></div>
+          <div id="optionPlayer">
+            <button id="newCard"></button>
+            <button id="holdOn"></button>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <!-- FOOTER -->
     <footer>
