@@ -179,31 +179,24 @@
         player.pointsA = house.handValue(player.hand, 1);
         house.pointsA = house.handValue(house.hand, 1);
 
-        //impresion de prueba
-        console.log("Player Hand")
-        console.table(player.hand)
-
         player.hand.forEach(hand => {
             card.paintCard(hand, "cardsPlayer", 0);
-
         })
 
         house.hand.forEach(hand => {
             // card.paintCard(hand, "cardsHouse", 1);
             card.paintCard(hand, "cardsHouse", 0);
-
         })
 
-
-        // console.table(`holdOn=${player.holdOn}; winner=${player.winner}`);
+        //impresion prueba
+        console.log("Player Hand")
+        console.table(player.hand)
 
         console.log("House Hand")
         console.table(house.hand)
-        // console.table(`holdOn=${house.holdOn}; winner=${house.winner}`);
 
         console.log(`PLAYER: points=${player.points}; points As=${player.pointsA} `)
         console.log(`HOUSE: points=${house.points}; points As=${house.pointsA} `)
-        console.log(`PLAYER: winner=${player.winner}; HOUSE winne=${house.winner}`)
         //impresion prueba
 
         //Selecting the winner
@@ -212,10 +205,6 @@
 
         //first testing for house - is the house not over the 21 - could be win .. for now
         if (house.points <= 21) { house.winner = true } else { if (house.pointsA <= 21) { house.winner = true } }
-        // console.log("Primera Evaluacion")
-        // console.log(`PLAYER: points=${player.points}; points As=${player.pointsA} `)
-        // console.log(`HOUSE: points=${house.points}; points As=${house.pointsA} `)
-        // console.log(`PLAYER: winner=${player.winner}; HOUSE winne=${house.winner}`)
 
         if (player.winner && house.winner) {
             //Both are posisble winners,so let's counting the points
@@ -225,14 +214,16 @@
                 house.winner = false;
 
                 console.log("Player Wins #1")
-                document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Win" + "You Earned <strong>100</strong> Credits"
+                document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Wins" + "You Earned <strong>10</strong> Credits"
+                addCredits(10);
                 //sum the points 50
 
             } else {
                 //house wins
                 house.winner = true;
                 player.winner = false;
-                document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins" + "You lost <strong>100</strong> Credits"
+                document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins" + "You lost <strong>10</strong> Credits"
+                addCredits(-10);
                 console.log("House Wins #2")
             }
         } else {
@@ -243,18 +234,21 @@
                 house.player = false
 
                 console.log("Both loose")
-                document.getElementById("result").innerHTML = "<strong>BOTH</strong> Loose :(" + "You lost <strong>100</strong> Credits"
+                document.getElementById("result").innerHTML = "<strong>BOTH</strong> Loose :(" + "You lost <strong>10</strong> Credits"
+                addCredits(-10);
             }
             else {
                 if (player.winner) {
                     house.winner = false;
-                    document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Win" + "You Earned <strong>100</strong> Credits"
+                    document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Wins" + "You Earned <strong>100</strong> Credits"
+                    addCredits(10);
                     console.log("Player Wins #3")
 
                 } else {
                     player.winner = false;
                     console.log("House Wins #4")
                     document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins" + "You lost <strong>100</strong> Credits"
+                    addCredits(-10);
                 }
 
             }
@@ -265,18 +259,18 @@
 
 
     //Execution Secuence
-    twentyOne();
-    // theDeck = card.getDeck(theDeck);
-    // card.getDeck(theDeck);
-    // house.mixer(theDeck)
-    // console.table(card.stick);
-    // console.table(card.figure);
-    // console.table(card.icon);
-    // console.table(card.value);
-    // console.table(theDeck);
-    // console.table(house.throwCard(theDeck));
+    var btnPlay = document.getElementById("btnPlay");
+    var btnNewCard = document.getElementById("newCard");
+    var btnHoldOn = document.getElementById("holdHon");
+    var optionsPlayer = document.getElementById("optionsPlayer");
 
-    //    console.log(randomCard());
+    //getting hide the buttons      
+    optionsPlayer.style.visibility = "hidden";
+
+    btnPlay.onclick = () => {
+        twentyOne();
+    }
+
 
 })();
 
