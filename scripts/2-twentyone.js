@@ -37,8 +37,10 @@
         //setting the card
         if (cardCover == 1) { imgCard.src = "../images/2-twentyone/cardCover.jpg" } else { imgCard.src = viewCard.pic }
         imgCard.id = `${viewCard.stick}_${viewCard.figure}`;
+        imgCard.style.width = "30%"
+        imgCard.style.height = "auto"
         imgCard.style.padding = "5px";
-        imgCard.style.display = "block"
+        imgCard.style.display = "inline-block"
         //Append Card
         node.appendChild(imgCard)
     }
@@ -273,10 +275,6 @@
 
         //Painting the cards - House
         card.paintCard(house.hand[0], "cardsHouse", 0);
-        // house.hand.forEach(hand => {
-        //     // card.paintCard(hand, "cardsHouse", 1);
-        //     card.paintCard(hand, "cardsHouse", 1);
-        // })
 
         //Evaluate if  house or Player has BlackJack
         player.pointsA = house.handValue(player.hand, 1);
