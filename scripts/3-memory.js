@@ -51,19 +51,32 @@ for (let i = 0; i < cardNames.length; i++) {
 // GENERATE RANDOM ARRAY WITH PAIRED CARDS ON PAGE LOAD
 let shuffled = genRandCards();
 
-// CARD FLIP FOR EACH CARD
-let lastCard = ['', ''];
-const flip = document.querySelectorAll('.memoryCards');
-flip.forEach((thisCard) =>
+// FLIP CARD
+let lastCard = [];
+let activeCards = [];
+
+const allCards = document.querySelectorAll('.memoryCards');
+allCards.forEach((thisCard) =>
   thisCard.addEventListener('click', () => {
-    lastCard = flipCards(shuffled, thisCard, lastCard);
+    // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
+    if (!activeCards.includes(thisCard.id)) {
+      activeCards.push(thisCard.id);
+      lastCard = flipCards(shuffled, thisCard, lastCard);
+    }
   })
 );
 
 // RESET GAME
 document.querySelector('#restart').onclick = () => {
+  // Generate new random cards
   shuffled = genRandCards();
-  console.log(shuffled);
+  // Reset ActiveCards
+  activeCards = [];
+
+  allCards.forEach((thisCard) => {
+    // Reset images
+    thisCard.src = '../images/3-memory/undercover.svg';
+  });
 };
 
 // FUNCTIONS
@@ -111,18 +124,21 @@ function flipCards(shuffled, thisCard, lastCard) {
     const lastId = Number(lastCard[0].id.slice(4)) - 1;
 
     if (shuffled[lastId] === shuffled[thisId]) {
+      // Match
       thisCard.src = cards[shuffled[thisId]];
       returnValue = [thisCard, 'match'];
-      console.log('Its a match!');
       return returnValue;
     } else {
+      // Nomatch
       thisCard.src = cards[shuffled[thisId]];
       returnValue = [thisCard, 'nomatch'];
       setTimeout(() => {
         lastCard[0].src = '../images/3-memory/undercover.svg';
         thisCard.src = '../images/3-memory/undercover.svg';
-      }, 1600);
-      console.log('No match, reset.');
+        activeCards = activeCards.filter(
+          (id) => id !== lastCard[0].id && id !== thisCard.id
+        );
+      }, 2000);
       return returnValue;
     }
   } else {
