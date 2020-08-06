@@ -18065,7 +18065,6 @@ video {
   --text-opacity: 1;
   color: #fff;
   color: rgba(255, 255, 255, var(--text-opacity));
-  margin: 0.5rem;
   padding: 0.5rem;
 }
 

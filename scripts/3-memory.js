@@ -13,7 +13,7 @@
 // Multiplayer (local)
 // ---------------
 
-//? GAME VARIABLES
+//? GAME VARIABLES EDITABLE
 const cardAmount = 16;
 
 // STARTING CARD NAMES
@@ -48,23 +48,27 @@ for (let i = 0; i < cardNames.length; i++) {
   cards.push(path);
 }
 
-// GENERATE RANDOM SELECTION OF CARD
-let chosenCards = [];
-while (chosenCards.length < cardAmount / 2) {
-  const randNum = ~~(Math.random() * cards.length);
-  if (!chosenCards.includes(randNum)) {
-    chosenCards.push(randNum);
-  }
-}
+// GENERATE RANDOM ARRAY WITH PAIRED CARDS ON PAGE LOAD
+let shuffled = genRandCards();
 
-// GENERATE 2 OF THE SAME CARDS IN THE ARRAY
-const doubleCards = chosenCards.concat(chosenCards);
+// CARD FLIP FOR EACH CARD
+let lastCard = ['', ''];
+const flip = document.querySelectorAll('.memoryCards');
+flip.forEach((thisCard) =>
+  thisCard.addEventListener('click', () => {
+    lastCard = flipCards(shuffled, thisCard, lastCard);
+  })
+);
 
-// SHUFFLE THE FINAL ARRAY
-const shuffled = shuffler(doubleCards);
+// RESET GAME
+document.querySelector('#restart').onclick = () => {
+  shuffled = genRandCards();
+  console.log(shuffled);
+};
 
-// FISHER-YATES SHUFFLER
+// FUNCTIONS
 function shuffler(input) {
+  // FISHER-YATES SHUFFLER
   let currentIndex = input.length;
   let temporaryValue, randomIndex;
 
@@ -78,63 +82,54 @@ function shuffler(input) {
   return input;
 }
 
-// PLACE RANDOM CARDS IN GRID
-/* const grid = document.querySelectorAll('.memoryCards');
-let i = 0;
-grid.forEach((card) => {
-  card.src = cards[shuffled[i]];
-  i++;
-}); */
-
-// CARD FLIP
-let lastChoice;
-const flip = document.querySelectorAll('.memoryCards');
-flip.forEach((card) =>
-  card.addEventListener('click', () => {
-    // Get ID to place in the shuffled[id] array
-    const id = Number(card.id.slice(4)) - 1;
-    flipCards(card, id, lastChoice);
-  })
-);
-
-function flipCards(card, id, lastChoice) {
-  /* // Flip REVEAL CARD
-  card.src = cards[shuffled[id]];
-  // Flip HIDE CARD
-  setTimeout(() => {
-    card.src = '../images/3-memory/undercover.svg';
-  }, 2000); */
-
-  // IF lastChoice === currentChoice => both cards stay
-  if (lastChoice) {
-    if (lastChoice === shuffled[id]) {
-      document.querySelector(`#card${lastChoice}`).src = cards[shuffled[lastChoice]];
-      card.src = cards[shuffled[id]];
-      lastChoice = shuffled[id];
-    } else {
-      setTimeout(() => {
-        document.querySelector(`#card${lastChoice}`).src =
-          '../images/3-memory/undercover.svg';
-        card.src = '../images/3-memory/undercover.svg';
-      }, 2000);
-      lastChoice = shuffled[id];
+function genRandCards() {
+  // GENERATE RANDOM SELECTION OF CARD
+  const chosenCards = [];
+  while (chosenCards.length < cardAmount / 2) {
+    const randNum = ~~(Math.random() * cards.length);
+    if (!chosenCards.includes(randNum)) {
+      chosenCards.push(randNum);
     }
-  } else {
-    card.src = cards[shuffled[id]];
-    lastChoice = shuffled[id];
   }
 
-  /* // If choice is
-  if (shuffled[id] === lastChoice) {
-    card.src = cards[shuffled[id]];
-  } else {
-  }
-  lastChoice = shuffled[id]; */
+  // GENERATE 2 OF THE SAME CARDS IN THE ARRAY
+  const doubleCards = chosenCards.concat(chosenCards);
+
+  // SHUFFLE THE FINAL ARRAY
+  const shuffled = shuffler(doubleCards);
+  return shuffled;
 }
 
-// DEBUGGER
-console.log('======================================');
-console.log(cardAmount);
-console.log(doubleCards);
-console.log(shuffled);
-console.log('======================================');
+function flipCards(shuffled, thisCard, lastCard) {
+  // Value that will be returned
+  let returnValue = [];
+  // Get the ID from thisCard
+  const thisId = Number(thisCard.id.slice(4)) - 1;
+
+  // IF there was a lastCard, check if ID's match, if not, turn cards
+  if (lastCard[1] === 'first card turned') {
+    const lastId = Number(lastCard[0].id.slice(4)) - 1;
+
+    if (shuffled[lastId] === shuffled[thisId]) {
+      thisCard.src = cards[shuffled[thisId]];
+      returnValue = [thisCard, 'match'];
+      console.log('Its a match!');
+      return returnValue;
+    } else {
+      thisCard.src = cards[shuffled[thisId]];
+      returnValue = [thisCard, 'nomatch'];
+      setTimeout(() => {
+        lastCard[0].src = '../images/3-memory/undercover.svg';
+        thisCard.src = '../images/3-memory/undercover.svg';
+      }, 1600);
+      console.log('No match, reset.');
+      return returnValue;
+    }
+  } else {
+    // If there is no lastCard, turn the card
+    thisCard.src = cards[shuffled[thisId]];
+    returnValue = [thisCard, 'first card turned'];
+    console.log('First card turned!');
+    return returnValue;
+  }
+}
