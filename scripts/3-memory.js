@@ -36,13 +36,16 @@
     cards.push(path);
   }
 
-  // GENERATE GRIDS (6-12-24)
-  // Start Grid
+  //
+  //
+  // ==================================== //
+  // STARTING VARIABLES AND STARTING GRID //
+  // ==================================== //
+  let gameClicks = 0;
   let cardAmount = 16;
   let timing = 1500;
   generateGrid(cardAmount);
   let shuffled = genRandCards();
-  // FLIP CARD
   let lastCard = [];
   let activeCards = [];
   let allCards = document.querySelectorAll('.memoryCards');
@@ -50,13 +53,17 @@
     thisCard.addEventListener('click', () => {
       // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
       if (!activeCards.includes(thisCard.id)) {
+        gameClicks++;
         activeCards.push(thisCard.id);
         lastCard = flipCards(timing, shuffled, thisCard, lastCard);
+        gameCheck(cardAmount, activeCards);
       }
     })
   );
 
-  // Easy
+  // ==== //
+  // Easy //
+  // ==== //
   document.querySelector('#easy').onclick = () => {
     timing = 1600;
     cardAmount = 12;
@@ -66,15 +73,19 @@
       thisCard.addEventListener('click', () => {
         // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
+          gameClicks++;
           activeCards.push(thisCard.id);
           lastCard = flipCards(timing, shuffled, thisCard, lastCard);
+          gameCheck(cardAmount, activeCards);
         }
       })
     );
-    resetGame();
+    restartGame();
   };
 
-  // Medium
+  // ====== //
+  // Medium //
+  // ====== //
   document.querySelector('#medium').onclick = () => {
     timing = 1000;
     cardAmount = 16;
@@ -84,15 +95,19 @@
       thisCard.addEventListener('click', () => {
         // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
+          gameClicks++;
           activeCards.push(thisCard.id);
           lastCard = flipCards(timing, shuffled, thisCard, lastCard);
+          gameCheck(cardAmount, activeCards);
         }
       })
     );
-    resetGame();
+    restartGame();
   };
 
-  // Hard
+  // ==== //
+  // Hard //
+  // ==== //
   document.querySelector('#hard').onclick = () => {
     timing = 600;
     cardAmount = 20;
@@ -102,22 +117,28 @@
       thisCard.addEventListener('click', () => {
         // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
+          gameClicks++;
           activeCards.push(thisCard.id);
           lastCard = flipCards(timing, shuffled, thisCard, lastCard);
+          gameCheck(cardAmount, activeCards);
         }
       })
     );
-    resetGame();
+    restartGame();
   };
 
-  // RESET GAME
+  // ========== //
+  // RESTART GAME //
+  // ========== //
   document.querySelector('#restart').onclick = () => {
-    resetGame();
+    restartGame();
   };
 
-  // CHECK ARRAY LENGTH TO SEE IF GAME IS WON :D
-
-  // FUNCTIONS
+  //
+  //
+  // ========= //
+  // FUNCTIONS //
+  // ========= //
   function generateGrid(cardAmount) {
     const main = document.querySelector('#main');
 
@@ -126,7 +147,7 @@
     for (let i = 0; i < cardAmount; i++) {
       cards += `<img id="card${
         i + 1
-      }" class="memoryCards hover:shadow-lg hover:border-yellow-500" src="../images/3-memory/undercover.svg" alt="Sun glasses with a moustache underneath"/>`;
+      }" class="memoryCards bg-white hover:shadow-lg hover:border-yellow-500" src="../images/3-memory/undercover.svg" alt="Sun glasses with a moustache underneath"/>`;
     }
 
     // Create grid
@@ -155,8 +176,10 @@
         break;
     }
     const grid = `
-                  <div class="grid mx-auto gap-1 sm:gap-2 md:gap-3 lg:gap-4 grid-cols-${cols} grid-rows-${rows} m-6 md:max-w-2xl ">
-                    ${cards}
+                  <div
+                    id="cardGrid"
+                    class="grid mx-auto gap-1 sm:gap-2 md:gap-3 lg:gap-4 grid-cols-${cols} grid-rows-${rows} m-6 md:max-w-2xl">
+                      ${cards}
                   </div>
                   `;
     main.innerHTML = grid;
@@ -231,7 +254,34 @@
     }
   }
 
-  function resetGame() {
+  function gameCheck(cardAmount, activeCards) {
+    // CHECK ACTIVE CARDS ARRAY LENGTH TO SEE IF GAME IS WON
+    if (cardAmount === activeCards.length) {
+      // TODO: ADD TIMER FUNCTIONALITY
+      let timer = 10;
+      // TODO: ADD COINS BASED ON TIME SPEND AND DIFFICULTY
+      // SHOW RESET BUTTON
+      document.querySelector(`#restart`).classList.remove('hidden');
+      document.querySelector(`#restart`).classList.add('inline-block');
+      // HIGHLIGHT ALL CARDS
+      activeCards.forEach((card) => {
+        document.querySelector(`#${card}`).classList.add('bg-yellow-500', 'border-black');
+        setTimeout(() => {
+          document
+            .querySelector(`#${card}`)
+            .classList.remove('bg-yellow-500', 'border-black');
+          document.querySelector(`#${card}`).classList.add('bg-white');
+        }, 4000);
+      });
+
+      // TODO: Show Message to user with gameClicks & Timer?
+      console.log(
+        `Congratulations, you won in ${timer} seconds and have clicked ${gameClicks} times`
+      );
+    }
+  }
+
+  function restartGame() {
     // Generate new random cards
     shuffled = genRandCards();
     // Reset ActiveCards
@@ -240,6 +290,11 @@
     allCards.forEach((thisCard) => {
       thisCard.src = '../images/3-memory/undercover.svg';
     });
+    // Reset gameClicks variable
+    gameClicks = 0;
+    // Hide button
+    document.querySelector(`#restart`).classList.remove('inline-block');
+    document.querySelector(`#restart`).classList.add('hidden');
   }
 
   //
