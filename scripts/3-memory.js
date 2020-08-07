@@ -36,47 +36,63 @@
     cards.push(path);
   }
 
-  //
-  //
   // ==================================== //
   // STARTING VARIABLES AND STARTING GRID //
   // ==================================== //
-  let gameClicks = 0;
+  // Starting Variables
   let cardAmount = 16;
+  let gameClicks = 0;
+  let gameTime = 0;
+  let gameTimer;
   let timing = 1500;
-  generateGrid(cardAmount);
   let shuffled = genRandCards();
   let lastCard = [];
   let activeCards = [];
+
+  generateGrid(cardAmount);
   let allCards = document.querySelectorAll('.memoryCards');
   allCards.forEach((thisCard) =>
     thisCard.addEventListener('click', () => {
       // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
       if (!activeCards.includes(thisCard.id)) {
         gameClicks++;
+        // If first card is turned, start timer, stop timer when game is won
+        if (gameClicks === 1) {
+          gameTimer = setInterval(() => {
+            gameTime++;
+          }, 1000);
+        }
         activeCards.push(thisCard.id);
         lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-        gameCheck(cardAmount, activeCards);
+        gameCheck(cardAmount, activeCards, gameTime);
       }
     })
   );
 
   // ==== //
-  // Easy //
+  // EASY //
   // ==== //
   document.querySelector('#easy').onclick = () => {
-    timing = 1600;
+    // Starting Variables
     cardAmount = 12;
+    gameClicks = 0;
+    gameTime = 0;
+    timing = 1600;
+
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
-        // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
           gameClicks++;
+          if (gameClicks === 1) {
+            gameTimer = setInterval(() => {
+              gameTime++;
+            }, 1000);
+          }
           activeCards.push(thisCard.id);
           lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-          gameCheck(cardAmount, activeCards);
+          gameCheck(cardAmount, activeCards, gameTime);
         }
       })
     );
@@ -84,21 +100,29 @@
   };
 
   // ====== //
-  // Medium //
+  // MEDIUM //
   // ====== //
   document.querySelector('#medium').onclick = () => {
-    timing = 1000;
+    // Starting Variables
     cardAmount = 16;
+    gameClicks = 0;
+    gameTime = 0;
+    timing = 1000;
+
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
-        // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
           gameClicks++;
+          if (gameClicks === 1) {
+            gameTimer = setInterval(() => {
+              gameTime++;
+            }, 1000);
+          }
           activeCards.push(thisCard.id);
           lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-          gameCheck(cardAmount, activeCards);
+          gameCheck(cardAmount, activeCards, gameTime);
         }
       })
     );
@@ -106,39 +130,81 @@
   };
 
   // ==== //
-  // Hard //
+  // HARD //
   // ==== //
   document.querySelector('#hard').onclick = () => {
-    timing = 600;
+    // Starting Variables
     cardAmount = 20;
+    gameClicks = 0;
+    gameTime = 0;
+    timing = 600;
+
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
-        // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
           gameClicks++;
+          if (gameClicks === 1) {
+            gameTimer = setInterval(() => {
+              gameTime++;
+            }, 1000);
+          }
           activeCards.push(thisCard.id);
           lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-          gameCheck(cardAmount, activeCards);
+          gameCheck(cardAmount, activeCards, gameTime);
         }
       })
     );
     restartGame();
   };
 
-  // ========== //
-  // RESTART GAME //
-  // ========== //
+  // ======= //
+  // RESTART //
+  // ======= //
   document.querySelector('#restart').onclick = () => {
     restartGame();
   };
 
-  //
-  //
   // ========= //
   // FUNCTIONS //
   // ========= //
+  // Generate pairs of random cards
+  function genRandCards() {
+    // GENERATE RANDOM SELECTION OF CARD
+    const chosenCards = [];
+    while (chosenCards.length < cardAmount / 2) {
+      const randNum = ~~(Math.random() * cards.length);
+      if (!chosenCards.includes(randNum)) {
+        chosenCards.push(randNum);
+      }
+    }
+
+    // GENERATE 2 OF THE SAME CARDS IN THE ARRAY
+    const doubleCards = chosenCards.concat(chosenCards);
+
+    // SHUFFLE THE FINAL ARRAY
+    const shuffled = shuffler(doubleCards);
+    return shuffled;
+  }
+
+  // Shuffle pairs of random cards
+  function shuffler(input) {
+    // FISHER-YATES SHUFFLER
+    let currentIndex = input.length;
+    let temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = input[currentIndex];
+      input[currentIndex] = input[randomIndex];
+      input[randomIndex] = temporaryValue;
+    }
+    return input;
+  }
+
+  // Generates variable grid of random cards
   function generateGrid(cardAmount) {
     const main = document.querySelector('#main');
 
@@ -185,39 +251,12 @@
     main.innerHTML = grid;
   }
 
-  function shuffler(input) {
-    // FISHER-YATES SHUFFLER
-    let currentIndex = input.length;
-    let temporaryValue, randomIndex;
-
-    while (currentIndex !== 0) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = input[currentIndex];
-      input[currentIndex] = input[randomIndex];
-      input[randomIndex] = temporaryValue;
-    }
-    return input;
+  // Game timer
+  function timer() {
+    gameTime++;
   }
 
-  function genRandCards() {
-    // GENERATE RANDOM SELECTION OF CARD
-    const chosenCards = [];
-    while (chosenCards.length < cardAmount / 2) {
-      const randNum = ~~(Math.random() * cards.length);
-      if (!chosenCards.includes(randNum)) {
-        chosenCards.push(randNum);
-      }
-    }
-
-    // GENERATE 2 OF THE SAME CARDS IN THE ARRAY
-    const doubleCards = chosenCards.concat(chosenCards);
-
-    // SHUFFLE THE FINAL ARRAY
-    const shuffled = shuffler(doubleCards);
-    return shuffled;
-  }
-
+  // Card flip functionality
   function flipCards(timing, shuffled, thisCard, lastCard) {
     // Value that will be returned
     let returnValue = [];
@@ -254,33 +293,37 @@
     }
   }
 
-  function gameCheck(cardAmount, activeCards) {
+  // If game is won, do certain things
+  function gameCheck(cardAmount, activeCards, gameTime) {
     // CHECK ACTIVE CARDS ARRAY LENGTH TO SEE IF GAME IS WON
     if (cardAmount === activeCards.length) {
-      // TODO: ADD TIMER FUNCTIONALITY
-      let timer = 10;
+      // RESET TIMER
+      clearInterval(gameTimer);
       // TODO: ADD COINS BASED ON TIME SPEND AND DIFFICULTY
       // SHOW RESET BUTTON
       document.querySelector(`#restart`).classList.remove('hidden');
       document.querySelector(`#restart`).classList.add('inline-block');
       // HIGHLIGHT ALL CARDS
       activeCards.forEach((card) => {
-        document.querySelector(`#${card}`).classList.add('bg-yellow-500', 'border-black');
+        document
+          .querySelector(`#${card}`)
+          .classList.add('bg-gray-900', 'border-yellow-500');
         setTimeout(() => {
           document
             .querySelector(`#${card}`)
-            .classList.remove('bg-yellow-500', 'border-black');
+            .classList.remove('bg-gray-900', 'border-yellow-500');
           document.querySelector(`#${card}`).classList.add('bg-white');
-        }, 4000);
+        }, 3000);
       });
 
       // TODO: Show Message to user with gameClicks & Timer?
       console.log(
-        `Congratulations, you won in ${timer} seconds and have clicked ${gameClicks} times`
+        `Congratulations, you won in ${gameTime} seconds and have clicked ${gameClicks} times`
       );
     }
   }
 
+  // Reset game
   function restartGame() {
     // Generate new random cards
     shuffled = genRandCards();
@@ -290,13 +333,14 @@
     allCards.forEach((thisCard) => {
       thisCard.src = '../images/3-memory/undercover.svg';
     });
-    // Reset gameClicks variable
+    // Reset gameClicks
     gameClicks = 0;
+    //Reset gameTime
+    gameTime = 0;
     // Hide button
     document.querySelector(`#restart`).classList.remove('inline-block');
     document.querySelector(`#restart`).classList.add('hidden');
   }
 
-  //
   //
 })();
