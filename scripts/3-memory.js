@@ -39,6 +39,7 @@
   // GENERATE GRIDS (6-12-24)
   // Start Grid
   let cardAmount = 16;
+  let timing = 1500;
   generateGrid(cardAmount);
   let shuffled = genRandCards();
   // FLIP CARD
@@ -50,25 +51,23 @@
       // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
       if (!activeCards.includes(thisCard.id)) {
         activeCards.push(thisCard.id);
-        lastCard = flipCards(shuffled, thisCard, lastCard);
+        lastCard = flipCards(timing, shuffled, thisCard, lastCard);
       }
     })
   );
 
   // Easy
   document.querySelector('#easy').onclick = () => {
-    generateGrid(12);
+    timing = 2000;
     cardAmount = 12;
-    shuffled = genRandCards();
-    lastCard = [];
-    activeCards = [];
+    generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
         // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
           activeCards.push(thisCard.id);
-          lastCard = flipCards(shuffled, thisCard, lastCard);
+          lastCard = flipCards(timing, shuffled, thisCard, lastCard);
         }
       })
     );
@@ -77,18 +76,16 @@
 
   // Medium
   document.querySelector('#medium').onclick = () => {
-    generateGrid(16);
+    timing = 1200;
     cardAmount = 16;
-    shuffled = genRandCards();
-    lastCard = [];
-    activeCards = [];
+    generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
         // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
           activeCards.push(thisCard.id);
-          lastCard = flipCards(shuffled, thisCard, lastCard);
+          lastCard = flipCards(timing, shuffled, thisCard, lastCard);
         }
       })
     );
@@ -97,18 +94,16 @@
 
   // Hard
   document.querySelector('#hard').onclick = () => {
-    generateGrid(20);
+    timing = 600;
     cardAmount = 20;
-    shuffled = genRandCards();
-    lastCard = [];
-    activeCards = [];
+    generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
         // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
         if (!activeCards.includes(thisCard.id)) {
           activeCards.push(thisCard.id);
-          lastCard = flipCards(shuffled, thisCard, lastCard);
+          lastCard = flipCards(timing, shuffled, thisCard, lastCard);
         }
       })
     );
@@ -136,6 +131,10 @@
     let rows;
     let cols;
     switch (cardAmount) {
+      case 6:
+        cols = 3;
+        rows = 2;
+        break;
       case 12:
         cols = 4;
         rows = 3;
@@ -147,6 +146,10 @@
       case 20:
         cols = 4;
         rows = 5;
+        break;
+      case 24:
+        cols = 4;
+        rows = 6;
         break;
     }
     const grid = `
@@ -190,7 +193,7 @@
     return shuffled;
   }
 
-  function flipCards(shuffled, thisCard, lastCard) {
+  function flipCards(timing, shuffled, thisCard, lastCard) {
     // Value that will be returned
     let returnValue = [];
     // Get the ID from thisCard
@@ -215,7 +218,7 @@
           activeCards = activeCards.filter(
             (id) => id !== lastCard[0].id && id !== thisCard.id
           );
-        }, 2000);
+        }, timing);
         return returnValue;
       }
     } else {
