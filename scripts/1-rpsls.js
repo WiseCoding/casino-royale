@@ -61,9 +61,11 @@
       if (result >= 0) {
         //User Wins
         outcome = "WIN";
+        credits(outcome);
       } else {
         //Computer Wins
         outcome = "LOSS";
+        credits(outcome);
       }
     }
 
@@ -168,45 +170,27 @@
 
   //
 
-  // Score
+  // CREDIT MANAGER
   localStorage.setItem("credits", 100);
-  let outcome = (o) => {
-    let credits = +localStorage.getItem("credits") || 100;
-    if (o == "WIN") {
-      credits += 10;
-      // add points (change credits in local storage)
-      // update credits in id credits
 
+  function credits(outcome) {
+    if (outcome === "WIN") {
+      credits += 10;
       localStorage.setItem("credits", localStorage.getItem("credits") + 10);
-      document.getElementById("addCredits").innerText = localStorage.getItem(
+      document.getElementById("credits").innerText = localStorage.getItem(
         "credits"
       );
-    } else if (o == "LOSS") {
+
+      // add points (change credits in local storage)
+      // update credits in ID "credits"
+    } else if (outcome === "LOSS") {
+      // deduct points (change credits in local storage)
+      // update credits in ID "credits"
       credits -= 10;
       localStorage.setItem("credits", localStorage.getItem("credits") - 10);
-      document.getElementById("addCredits").innerText = localStorage.getItem(
+      document.getElementById("credits").innerText = localStorage.getItem(
         "credits"
       );
     }
-  };
-
-  // let outcome = (o) => {
-  //   let credits = +localStorage.getItem("credits") || 0;
-
-  //   if (o == "WIN") {
-  //     credits += 10;
-  //     localStorage.setItem("credits", localStorage.getItem("credits") + 10);
-  //     document.getElementById("credits").innerText = localStorage.getItem(
-  //       "credits"
-
-  //   } else if (o == "LOSS") {
-  //     credits -= 10;
-  //   }
-  //   localStorage.setItem("credits", localStorage.getItem("credits") - 10);
-  //     document.getElementById("credits").innerText = localStorage.getItem(
-  //       "credits"
-
-  // };
-
-  //
+  }
 })();
