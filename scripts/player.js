@@ -23,7 +23,6 @@
     localStorage.setItem('credits', Number(oldCredits) + newCredits);
     document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
   }
-
   //
 
   // GET+SET USERNAME & STARTING CREDITS

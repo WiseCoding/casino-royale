@@ -1,9 +1,19 @@
 
 
 (() => {
-
     //The Deck represent the deck of all cards, could be modified when the cards are dispatched
     var theDeck = [];
+    var gambleCredits = 0;
+
+    // //Function AddCredits
+    // function addCredits(newCredits) {
+    //     const oldCredits = localStorage.getItem('credits');
+    //     localStorage.setItem('credits', Number(oldCredits) + newCredits);
+    //     document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
+    //     if (newCredits > 0) {
+    //         player.winnerSound();
+    //     }
+    // }
 
     //Generate some random options
     generator = (min, max) => {
@@ -45,6 +55,48 @@
         node.appendChild(imgCard)
     }
     //END object:card
+    //object:player
+    var player = {
+        hand: [],
+        holdOn: false,
+        points: 0,
+        pointsA: 0,
+        winner: false
+    };
+
+    player.winnerSound = (option) => {
+
+        switch (option) {
+            case 1:
+                //Winner sound
+                var audio = new Audio('../resources/blackJack_win.mp3');
+                break;
+
+            case 2:
+                //Loose Sound
+                var audio = new Audio('../resources/blackJack_lost.mp3');
+                break;
+            case 3:
+                //BlackJack
+                var audio = new Audio('../resources/blackJack_win.mp3');
+                break;
+        }
+        audio.play();
+    }
+
+    //Function AddCredits
+    player.addCredits = (newCredits) => {
+        const oldCredits = localStorage.getItem('credits');
+        localStorage.setItem('credits', Number(oldCredits) + newCredits);
+        document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
+        if (newCredits > 0) {
+            player.winnerSound(1); //winner            
+        } else {
+            player.winnerSound(2); //lost          
+        }
+    }
+
+    //object:player
 
     //******** Creating the object house, that will be contain  the role of the house********
     //object:house
@@ -177,7 +229,7 @@
                 if (player.points == house.points || player.pointsA == house.pointsA) {
                     //dawn
                     console.log("Dawn #0")
-                    document.getElementById("result").innerHTML = "<strong>Dawn</strong> Wins" + "You Earned <strong>5</strong> Credits"
+                    document.getElementById("result").innerHTML = "<strong>Dawn</strong>"
                 } else {
 
                     //player wins
@@ -185,16 +237,20 @@
                     house.winner = false;
 
                     console.log("Player Wins #1")
-                    document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Wins" + "You Earned <strong>10</strong> Credits"
-                    // addCredits(10);
+                    document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Wins, " + `You Earned <strong>${gambleCredits}</strong> Credits`
+                    //Credits
+                    player.addCredits(gambleCredits);
+
                 }
 
             } else {
                 //house wins
                 house.winner = true;
                 player.winner = false;
-                document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins" + "You lost <strong>10</strong> Credits"
-                // addCredits(-10);
+                document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins," + `You lost <strong>${gambleCredits}</strong> Credits`
+                //credits
+                player.addCredits(-gambleCredits);
+
                 console.log("House Wins #2")
             }
         } else {
@@ -205,21 +261,24 @@
                 house.player = false
 
                 console.log("Both loose")
-                document.getElementById("result").innerHTML = "<strong>BOTH</strong> Loose :(" + "You lost <strong>10</strong> Credits"
-                // addCredits(-10);
+                document.getElementById("result").innerHTML = "<strong>BOTH</strong> Loose :(" + ` ,You lost <strong>${gambleCredits}</strong> Credits`
+                //credits
+                player.addCredits(-gambleCredits);
             }
             else {
                 if (player.winner) {
                     house.winner = false;
-                    document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Wins" + "You Earned <strong>10</strong> Credits"
-                    // addCredits(10);
+                    document.getElementById("result").innerHTML = "<strong>PLAYER</strong> Wins, " + `You Earned <strong>${gambleCredits}</strong> Credits`
+                    //credits
+                    player.addCredits(gambleCredits);
                     console.log("Player Wins #3")
 
                 } else {
                     player.winner = false;
                     console.log("House Wins #4")
-                    document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins" + "You lost <strong>10</strong> Credits"
-                    // addCredits(-10);
+                    document.getElementById("result").innerHTML = "<strong>HOUSE</strong> Wins, " + `You lost <strong>${gambleCredits}</strong> Credits`
+                    //credits
+                    player.addCredits(-gambleCredits);
                 }
 
             }
@@ -230,15 +289,7 @@
     //End object:house
 
     //******** Creating the object player, that will be contain  info about the player********
-    //object:player
-    var player = {
-        hand: [],
-        holdOn: false,
-        points: 0,
-        pointsA: 0,
-        winner: false
-    };
-    //object:player
+
 
 
     function twentyOne() {
@@ -288,8 +339,9 @@
             house.winner = true;
             player.winner = true;
 
-            document.getElementById("result").innerHTML = "<strong>DAWN !! BlackJack</strong><br/> You wins <strong>5</strong> Credits"
-            // addCredits(5);
+            document.getElementById("result").innerHTML = "<strong>DAWN !! BlackJack</strong><br/> <strong>HOUSE</strong> wins, " + ` you lost <strong>${gambleCredits}</strong> Credits`
+            //credits
+            player.addCredits(-gambleCredits);
             console.log("DAWN #BLackJack")
             return; //end of the game
 
@@ -299,8 +351,9 @@
                 //painting the second card of house
                 card.paintCard(house.hand[1], "cardsHouse", 0);
                 house.winner = true;
-                document.getElementById("result").innerHTML = "<strong>BlackJack</strong><br/><strong>HOUSE</strong> Wins" + "You lost <strong>10</strong> Credits"
-                // addCredits(-10);
+                document.getElementById("result").innerHTML = "<strong>BlackJack</strong><br/><strong>HOUSE</strong> Wins, " + `You lost <strong>${gambleCredits}</strong> Credits`
+                //credits
+                player.addCredits(-gambleCredits);
                 console.log("HOUSE Wins #BLackJack")
                 return; //end of the game
             } else if (player.pointsA == 21) {
@@ -308,8 +361,10 @@
                 //painting the second card of house
                 card.paintCard(house.hand[1], "cardsHouse", 0);
                 player.winner = true;
-                document.getElementById("result").innerHTML = "<strong>BlackJack</strong><br/><strong>PLAYER</strong> Wins" + "You Earned <strong>10</strong> Credits"
-                // addCredits(10);
+                document.getElementById("result").innerHTML = "<strong>BlackJack</strong><br/><strong>PLAYER</strong> Wins, " + `You Earned <strong>${gambleCredits}</strong> Credits`
+
+                //credits
+                player.addCredits(gambleCredits);
                 console.log("PLAYER Wins #BLackJack")
                 return; //End of the game
             }
@@ -344,6 +399,8 @@
         cardsHouse.innerHTML = "";
         cardsPlayer.innerHTML = "";
         targetResult.innerHTML = "";
+        //bet
+        gambleCredits = 15;
         console.clear();
 
         // //Asking to player for howmuch wants to play
