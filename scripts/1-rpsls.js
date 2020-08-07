@@ -8,24 +8,24 @@
   // AVAILABLE OPTIONS
   let options = [
     {
-      selection: "Rock",
-      defeat: ["Scissors", "Lizard"],
+      selection: 'Rock',
+      defeat: ['Scissors', 'Lizard'],
     },
     {
-      selection: "Paper",
-      defeat: ["Rock", "Spock"],
+      selection: 'Paper',
+      defeat: ['Rock', 'Spock'],
     },
     {
-      selection: "Scissors",
-      defeat: ["Paper", "Lizard"],
+      selection: 'Scissors',
+      defeat: ['Paper', 'Lizard'],
     },
     {
-      selection: "Lizard",
-      defeat: ["Paper", "Spock"],
+      selection: 'Lizard',
+      defeat: ['Paper', 'Spock'],
     },
     {
-      selection: "Spock",
-      defeat: ["Rock", "Scissors"],
+      selection: 'Spock',
+      defeat: ['Rock', 'Scissors'],
     },
   ];
 
@@ -36,131 +36,127 @@
     let choice;
 
     switch (computerChoice) {
-      case "Rock":
-        choice = "ROCK";
+      case 'Rock':
+        choice = 'ROCK';
         break;
-      case "Paper":
-        choice = "PAPER";
+      case 'Paper':
+        choice = 'PAPER';
         break;
-      case "Scissors":
-        choice = "SCISSORS";
+      case 'Scissors':
+        choice = 'SCISSORS';
         break;
-      case "Lizard":
-        choice = "LIZARD";
+      case 'Lizard':
+        choice = 'LIZARD';
         break;
-      case "Spock":
-        choice = "SPOCK";
+      case 'Spock':
+        choice = 'SPOCK';
         break;
     }
 
     let outcome;
     if (playerChoice === computerChoice) {
-      outcome = "DRAW";
+      outcome = 'DRAW';
     } else {
       let result = options[id].defeat.indexOf(computerChoice);
       if (result >= 0) {
         //User Wins
-        outcome = "WIN";
+        outcome = 'WIN';
+        credits(outcome);
       } else {
         //Computer Wins
-        outcome = "LOSS";
+        outcome = 'LOSS';
+        credits(outcome);
       }
     }
 
     // SET COMPUTER HTML
-    document.querySelector("#gameState").textContent = `${outcome}`;
+    document.querySelector('#gameState').textContent = `${outcome}`;
     document.querySelector(
-      "#computerImage"
+      '#computerImage'
     ).src = `../images/1-rpsls/${computerChoice}.svg`;
-    document.querySelector("#computerChoice").textContent = `${choice}`;
+    document.querySelector('#computerChoice').textContent = `${choice}`;
 
     switch (outcome) {
-      case "WIN":
+      case 'WIN':
         // Add Color
         document
           .querySelector(`#${playerChoice.toLowerCase()}`)
-          .classList.add("bg-green-500");
-        document.querySelector(`#computerDiv`).classList.add("bg-green-500");
+          .classList.add('bg-green-500');
+        document.querySelector(`#computerDiv`).classList.add('bg-green-500');
         // Remove Color
         setTimeout(() => {
           document
             .querySelector(`#${playerChoice.toLowerCase()}`)
-            .classList.remove("bg-green-500");
-          document
-            .querySelector(`#computerDiv`)
-            .classList.remove("bg-green-500");
+            .classList.remove('bg-green-500');
+          document.querySelector(`#computerDiv`).classList.remove('bg-green-500');
         }, 1500);
         break;
 
-      case "LOSS":
+      case 'LOSS':
         // Add Color
         document
           .querySelector(`#${playerChoice.toLowerCase()}`)
-          .classList.add("bg-red-500");
-        document.querySelector(`#computerDiv`).classList.add("bg-red-500");
+          .classList.add('bg-red-500');
+        document.querySelector(`#computerDiv`).classList.add('bg-red-500');
         // Remove Color
         setTimeout(() => {
           document
             .querySelector(`#${playerChoice.toLowerCase()}`)
-            .classList.remove("bg-red-500");
-          document.querySelector(`#computerDiv`).classList.remove("bg-red-500");
+            .classList.remove('bg-red-500');
+          document.querySelector(`#computerDiv`).classList.remove('bg-red-500');
         }, 1500);
         break;
 
-      case "DRAW":
+      case 'DRAW':
         // Add Color
         document
           .querySelector(`#${playerChoice.toLowerCase()}`)
-          .classList.add("bg-yellow-500");
-        document.querySelector(`#computerDiv`).classList.add("bg-yellow-500");
-        document.querySelector(`#gameState`).classList.add("text-black");
-        document.querySelector(`#computerChoice`).classList.add("text-black");
+          .classList.add('bg-yellow-500');
+        document.querySelector(`#computerDiv`).classList.add('bg-yellow-500');
+        document.querySelector(`#gameState`).classList.add('text-black');
+        document.querySelector(`#computerChoice`).classList.add('text-black');
         // Remove Color
         setTimeout(() => {
           document
             .querySelector(`#${playerChoice.toLowerCase()}`)
-            .classList.remove("bg-yellow-500");
-          document
-            .querySelector(`#computerDiv`)
-            .classList.remove("bg-yellow-500");
-          document.querySelector(`#gameState`).classList.remove("text-black");
-          document
-            .querySelector(`#computerChoice`)
-            .classList.remove("text-black");
+            .classList.remove('bg-yellow-500');
+          document.querySelector(`#computerDiv`).classList.remove('bg-yellow-500');
+          document.querySelector(`#gameState`).classList.remove('text-black');
+          document.querySelector(`#computerChoice`).classList.remove('text-black');
         }, 1500);
         break;
     }
 
     // DEBUGGING
-    console.log("==================");
-    console.log(playerChoice, ": Player choice");
-    console.log(computerChoice, ": Computer choice");
-    console.log(outcome, ": Game outcome");
-    console.log("==================");
+    console.log('==================');
+    console.log(playerChoice, ': Player choice');
+    console.log(computerChoice, ': Computer choice');
+    console.log(outcome, ': Game outcome');
+    console.log('==================');
   }
 
   // CLICK HANDLERS
-  document.querySelector("#rock").onclick = () => {
+  document.querySelector('#rock').onclick = () => {
     let userOption = 0;
     let machineOption = generator(0, 4);
     game(userOption, machineOption);
   };
-  document.querySelector("#paper").onclick = () => {
+  document.querySelector('#paper').onclick = () => {
     let userOption = 1;
     let machineOption = generator(0, 4);
     game(userOption, machineOption);
   };
-  document.querySelector("#scissors").onclick = () => {
+  document.querySelector('#scissors').onclick = () => {
     let userOption = 2;
     let machineOption = generator(0, 4);
     game(userOption, machineOption);
   };
-  document.querySelector("#lizard").onclick = () => {
+  document.querySelector('#lizard').onclick = () => {
     let userOption = 3;
     let machineOption = generator(0, 4);
     game(userOption, machineOption);
   };
-  document.querySelector("#spock").onclick = () => {
+  document.querySelector('#spock').onclick = () => {
     let userOption = 4;
     let machineOption = generator(0, 4);
     game(userOption, machineOption);
@@ -168,8 +164,8 @@
 
   //
 
-  //Score
-  var score = 100;
+  /* //Score
+  let score = 100;
   function points(score) {
     if (playerChoice === computerChoice) {
       score += 0;
@@ -183,10 +179,18 @@
         score -= 10;
       }
     }
-  }
-  // var credits = document.getElementById("credits");
-  // credits.innerHTML = score;
-  document.getElementById("credits").innerHTML = score;
+  } */
 
-  //
+  // CREDIT MANAGER
+  function credits(outcome) {
+    if (outcome === 'WIN') {
+      console.log('ITS A WIN');
+      // add points (change credits in local storage)
+      // update credits in ID "credits"
+    } else if (outcome === 'LOSS') {
+      console.log('ITS A LOSS');
+      // deduct points (change credits in local storage)
+      // update credits in ID "credits"
+    }
+  }
 })();
