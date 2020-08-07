@@ -58,7 +58,7 @@
 
   // Easy
   document.querySelector('#easy').onclick = () => {
-    timing = 2000;
+    timing = 1600;
     cardAmount = 12;
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
@@ -76,7 +76,7 @@
 
   // Medium
   document.querySelector('#medium').onclick = () => {
-    timing = 1200;
+    timing = 1000;
     cardAmount = 16;
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
@@ -115,6 +115,8 @@
     resetGame();
   };
 
+  // CHECK ARRAY LENGTH TO SEE IF GAME IS WON :D
+
   // FUNCTIONS
   function generateGrid(cardAmount) {
     const main = document.querySelector('#main');
@@ -124,7 +126,7 @@
     for (let i = 0; i < cardAmount; i++) {
       cards += `<img id="card${
         i + 1
-      }" class="memoryCards" src="../images/3-memory/undercover.svg" alt="Sun glasses with a moustache underneath"/>`;
+      }" class="memoryCards hover:shadow-lg hover:border-yellow-500" src="../images/3-memory/undercover.svg" alt="Sun glasses with a moustache underneath"/>`;
     }
 
     // Create grid

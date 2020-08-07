@@ -7,5 +7,5 @@
 }
 
 .memoryCards {
-  @apply border rounded-lg bg-black text-white p-2;
+  @apply border shadow rounded-lg bg-white text-white p-2 transition duration-150 ease-in-out;
 }
