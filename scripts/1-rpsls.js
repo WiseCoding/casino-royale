@@ -168,25 +168,45 @@
 
   //
 
-  //Score
-  var score = 100;
-  function points(score) {
-    if (playerChoice === computerChoice) {
-      score += 0;
-    } else {
-      let result = options[id].defeat.indexOf(computerChoice);
-      if (result >= 0) {
-        //User Wins
-        score += 10;
-      } else {
-        //Computer Wins
-        score -= 10;
-      }
+  // Score
+  localStorage.setItem("credits", 100);
+  let outcome = (o) => {
+    let credits = +localStorage.getItem("credits") || 100;
+    if (o == "WIN") {
+      credits += 10;
+      // add points (change credits in local storage)
+      // update credits in id credits
+
+      localStorage.setItem("credits", localStorage.getItem("credits") + 10);
+      document.getElementById("addCredits").innerText = localStorage.getItem(
+        "credits"
+      );
+    } else if (o == "LOSS") {
+      credits -= 10;
+      localStorage.setItem("credits", localStorage.getItem("credits") - 10);
+      document.getElementById("addCredits").innerText = localStorage.getItem(
+        "credits"
+      );
     }
-  }
-  // var credits = document.getElementById("credits");
-  // credits.innerHTML = score;
-  document.getElementById("credits").innerHTML = score;
+  };
+
+  // let outcome = (o) => {
+  //   let credits = +localStorage.getItem("credits") || 0;
+
+  //   if (o == "WIN") {
+  //     credits += 10;
+  //     localStorage.setItem("credits", localStorage.getItem("credits") + 10);
+  //     document.getElementById("credits").innerText = localStorage.getItem(
+  //       "credits"
+
+  //   } else if (o == "LOSS") {
+  //     credits -= 10;
+  //   }
+  //   localStorage.setItem("credits", localStorage.getItem("credits") - 10);
+  //     document.getElementById("credits").innerText = localStorage.getItem(
+  //       "credits"
+
+  // };
 
   //
 })();
