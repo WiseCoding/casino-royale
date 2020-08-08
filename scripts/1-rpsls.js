@@ -171,12 +171,11 @@
   //
 
   // CREDIT MANAGER
-  localStorage.setItem("credits", 100);
 
   function credits(outcome) {
     if (outcome === "WIN") {
       credits += 10;
-      localStorage.setItem("credits", localStorage.getItem("credits") + 10);
+      localStorage.setItem("credits", localStorage.getItem("100") + 10);
       document.getElementById("credits").innerText = localStorage.getItem(
         "credits"
       );
@@ -187,7 +186,7 @@
       // deduct points (change credits in local storage)
       // update credits in ID "credits"
       credits -= 10;
-      localStorage.setItem("credits", localStorage.getItem("credits") - 10);
+      localStorage.setItem("credits", localStorage.getItem("100") - 10);
       document.getElementById("credits").innerText = localStorage.getItem(
         "credits"
       );
