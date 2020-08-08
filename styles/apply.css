@@ -1,5 +1,5 @@
 .card {
-  @apply flex flex-col border rounded-lg shadow-lg overflow-hidden cursor-pointer;
+  @apply flex flex-col border rounded-lg shadow-lg overflow-hidden cursor-pointer m-2;
 }
 
 .badge {

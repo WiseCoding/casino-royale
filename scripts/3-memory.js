@@ -299,10 +299,11 @@
     if (cardAmount === activeCards.length) {
       // RESET TIMER
       clearInterval(gameTimer);
-      // TODO: ADD COINS BASED ON TIME SPEND AND DIFFICULTY
-      // SHOW RESET BUTTON
+      // HIDE DIFFICULTY & SHOW RESTART
+      document.querySelector(`#difficulty`).classList.remove('flex');
+      document.querySelector(`#difficulty`).classList.add('hidden');
       document.querySelector(`#restart`).classList.remove('hidden');
-      document.querySelector(`#restart`).classList.add('inline-block');
+      document.querySelector(`#restart`).classList.add('flex');
       // HIGHLIGHT ALL CARDS
       activeCards.forEach((card) => {
         document
@@ -316,6 +317,7 @@
         }, 3000);
       });
 
+      // TODO: ADD COINS BASED ON TIME SPEND AND DIFFICULTY
       // TODO: Show Message to user with gameClicks & Timer?
       console.log(
         `Congratulations, you won in ${gameTime} seconds and have clicked ${gameClicks} times`
@@ -338,7 +340,9 @@
     //Reset gameTime
     gameTime = 0;
     // Hide button
-    document.querySelector(`#restart`).classList.remove('inline-block');
+    document.querySelector(`#difficulty`).classList.remove('hidden');
+    document.querySelector(`#difficulty`).classList.add('flex');
+    document.querySelector(`#restart`).classList.remove('flex');
     document.querySelector(`#restart`).classList.add('hidden');
   }
 
