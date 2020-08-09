@@ -44,6 +44,7 @@
   let gameClicks = 0;
   let gameTime = 0;
   let gameTimer;
+  let flipCheck = true;
   let timing = 1500;
   let shuffled = genRandCards();
   let lastCard = [];
@@ -53,8 +54,15 @@
   let allCards = document.querySelectorAll('.memoryCards');
   allCards.forEach((thisCard) =>
     thisCard.addEventListener('click', () => {
+      // When cards are nomatch, prevent clicks until cards are flipped back again
+      if (lastCard[1] === 'nomatch') {
+        flipCheck = false;
+        console.log('falser');
+        console.log(flipCheck, 'flip 1');
+      }
       // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
-      if (!activeCards.includes(thisCard.id)) {
+      if (!activeCards.includes(thisCard.id && flipCheck === true)) {
+        console.log(flipCheck, 'flip 2');
         gameClicks++;
         // If first card is turned, start timer, stop timer when game is won
         if (gameClicks === 1) {
@@ -282,6 +290,7 @@
           activeCards = activeCards.filter(
             (id) => id !== lastCard[0].id && id !== thisCard.id
           );
+          flipCheck = true;
         }, timing);
         return returnValue;
       }

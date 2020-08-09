@@ -7,7 +7,26 @@
 
     <title>Memory Game</title>
 
-    <!--no favicon-->
+    <!-- FAVICON JESTER -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../images/0-favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../images/0-favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../images/0-favicon/favicon-16x16.png"
+    />
+    <link rel="manifest" href="../images/0-favicon/site.webmanifest" />
+
     <link rel="stylesheet" type="text/css" href="../styles/index.css" />
     <script src="../scripts/player.js" defer></script>
     <script src="../scripts/3-memory.js" defer></script>
@@ -94,14 +113,15 @@
 
     <!-- ASIDE -->
     <aside
-      class="absolute flex justify-center w-screen transform -translate-x-1/2 transition duration-1000 ease-in-out hover:translate-x-2 hover:translate-y-2"
+      class="hidden absolute flex justify-center w-screen transform -translate-x-36 transition duration-1000 ease-in-out hover:translate-x-24 hover:translate-y-2"
     >
-      <div class="absolute border shadow rounded-lg bg-white text-white max-w-lg p-4 m-6">
-        <p id="info" class="">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ex pariatur, a
-          quisquam perferendis saepe iure rem cupiditate cum dicta fuga corrupti in magni,
-          nobis enim facere veritatis asperiores quas.
-        </p>
+      <div
+        class="absolute border shadow rounded-lg bg-white text-black max-w-lg p-2 grid grid-cols-2 grid-rows-2 gap-2 justify-end"
+      >
+        <p class="text-right">Seconds</p>
+        <p id="seconds" class="text-orange-500">100</p>
+        <p class="text-right">Clicks</p>
+        <p id="clicks" class="text-green-500">100</p>
       </div>
     </aside>
 
@@ -112,7 +132,6 @@
         <select
           title="Select the difficulty"
           class="form-select block appearance-none w-4/6 sm:w-1/2 md:w-1/3 lg:max-w-sm px-10 py-2 font-medium text-sm text-center rounded-md shadow text-black bg-yellow-500 hover:shadow-md focus:outline-none transition duration-150 ease-in-out"
-          onChange="<!-- setDifficulty(this.value) -->"
           aria-label="Selected tab"
         >
           <option id="easy" value="easy">Easy</option>
