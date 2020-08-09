@@ -58,6 +58,26 @@
       </div>
     </header>
 
+    <!-- ASIDE -->
+    <aside
+      id="info"
+      class="hidden absolute md:flex justify-start w-screen transform -translate-x-40 translate-y-2 transition duration-300 ease-in-out hover:translate-x-1"
+    >
+      <div
+        class="absolute border shadow rounded-lg bg-gray-100 text-black max-w-lg p-2 grid grid-cols-3 grid-rows-2 gap-2 hover:shadow-md hover:border-yellow-500 text-center"
+      >
+        <p
+          class="col-start-3 row-span-2 text-center transform -rotate-90 self-center font-bold"
+        >
+          STATS
+        </p>
+        <p class="text-right row-start-1 col-start-1">Seconds</p>
+        <p id="seconds" class="text-orange-500 row-start-1 col-start-2"></p>
+        <p class="text-right row-start-2 col-start-1">Clicks</p>
+        <p id="clicks" class="text-green-500 row-start-2 col-start-2"></p>
+      </div>
+    </aside>
+
     <!-- NAV -->
     <nav>
       <div class="sm:hidden flex justify-center m-6">
@@ -111,20 +131,6 @@
       </div>
     </nav>
 
-    <!-- ASIDE -->
-    <aside
-      class="hidden absolute flex justify-center w-screen transform -translate-x-36 transition duration-1000 ease-in-out hover:translate-x-24 hover:translate-y-2"
-    >
-      <div
-        class="absolute border shadow rounded-lg bg-white text-black max-w-lg p-2 grid grid-cols-2 grid-rows-2 gap-2 justify-end"
-      >
-        <p class="text-right">Seconds</p>
-        <p id="seconds" class="text-orange-500">100</p>
-        <p class="text-right">Clicks</p>
-        <p id="clicks" class="text-green-500">100</p>
-      </div>
-    </aside>
-
     <!-- MAIN -->
     <main>
       <!-- DIFFICULTY DROPDOWN / BUTTONS -->
@@ -151,6 +157,8 @@
 
       <!-- CARD GENERATOR -->
       <div id="main" class="mx-1 sm:mx-2 md:mx-4 lg:mx-6"></div>
+
+      <p id="message" class="text-center mx-4 my-2 text-gray-700"></p>
     </main>
 
     <!-- FOOTER -->

@@ -40,12 +40,14 @@
   // STARTING VARIABLES AND STARTING GRID //
   // ==================================== //
   // Starting Variables
+  let difficulty = 'medium';
   let cardAmount = 16;
   let gameClicks = 0;
   let gameTime = 0;
   let gameTimer;
-  let flipCheck = true;
-  let timing = 1500;
+  let flipCheck = 1;
+  let flipConfirm = 'go';
+  let timing = 1000;
   let shuffled = genRandCards();
   let lastCard = [];
   let activeCards = [];
@@ -54,20 +56,21 @@
   let allCards = document.querySelectorAll('.memoryCards');
   allCards.forEach((thisCard) =>
     thisCard.addEventListener('click', () => {
-      // When cards are nomatch, prevent clicks until cards are flipped back again
-      if (lastCard[1] === 'nomatch') {
-        flipCheck = false;
-        console.log('falser');
-        console.log(flipCheck, 'flip 1');
+      // When cards are no match, halt turning cards until they are turned again
+      if (flipConfirm === 'halt' && flipCheck === 1) {
+        flipCheck = 0;
       }
+
       // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
-      if (!activeCards.includes(thisCard.id && flipCheck === true)) {
-        console.log(flipCheck, 'flip 2');
+      if (flipCheck === 1 && flipConfirm === 'go' && !activeCards.includes(thisCard.id)) {
         gameClicks++;
         // If first card is turned, start timer, stop timer when game is won
         if (gameClicks === 1) {
+          payCredits(difficulty);
           gameTimer = setInterval(() => {
             gameTime++;
+            document.querySelector('#seconds').textContent = gameTime;
+            document.querySelector('#clicks').textContent = gameClicks;
           }, 1000);
         }
         activeCards.push(thisCard.id);
@@ -81,21 +84,38 @@
   // EASY //
   // ==== //
   document.querySelector('#easy').onclick = () => {
+    // RESET TIMER
+    clearInterval(gameTimer);
+
     // Starting Variables
+    difficulty = 'easy';
     cardAmount = 12;
     gameClicks = 0;
     gameTime = 0;
     timing = 1600;
+    shuffled = genRandCards();
+    lastCard = [];
+    activeCards = [];
 
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
-        if (!activeCards.includes(thisCard.id)) {
+        if (flipConfirm === 'halt' && flipCheck === 1) {
+          flipCheck = 0;
+        }
+        if (
+          flipCheck === 1 &&
+          flipConfirm === 'go' &&
+          !activeCards.includes(thisCard.id)
+        ) {
           gameClicks++;
           if (gameClicks === 1) {
+            payCredits(difficulty);
             gameTimer = setInterval(() => {
               gameTime++;
+              document.querySelector('#seconds').textContent = gameTime;
+              document.querySelector('#clicks').textContent = gameClicks;
             }, 1000);
           }
           activeCards.push(thisCard.id);
@@ -111,21 +131,38 @@
   // MEDIUM //
   // ====== //
   document.querySelector('#medium').onclick = () => {
+    // RESET TIMER
+    clearInterval(gameTimer);
+
     // Starting Variables
+    difficulty = 'medium';
     cardAmount = 16;
     gameClicks = 0;
     gameTime = 0;
     timing = 1000;
+    shuffled = genRandCards();
+    lastCard = [];
+    activeCards = [];
 
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
-        if (!activeCards.includes(thisCard.id)) {
+        if (flipConfirm === 'halt' && flipCheck === 1) {
+          flipCheck = 0;
+        }
+        if (
+          flipCheck === 1 &&
+          flipConfirm === 'go' &&
+          !activeCards.includes(thisCard.id)
+        ) {
           gameClicks++;
           if (gameClicks === 1) {
+            payCredits(difficulty);
             gameTimer = setInterval(() => {
               gameTime++;
+              document.querySelector('#seconds').textContent = gameTime;
+              document.querySelector('#clicks').textContent = gameClicks;
             }, 1000);
           }
           activeCards.push(thisCard.id);
@@ -141,21 +178,38 @@
   // HARD //
   // ==== //
   document.querySelector('#hard').onclick = () => {
+    // RESET TIMER
+    clearInterval(gameTimer);
+
     // Starting Variables
+    difficulty = 'hard';
     cardAmount = 20;
     gameClicks = 0;
     gameTime = 0;
     timing = 600;
+    shuffled = genRandCards();
+    lastCard = [];
+    activeCards = [];
 
     generateGrid(cardAmount);
     allCards = document.querySelectorAll('.memoryCards');
     allCards.forEach((thisCard) =>
       thisCard.addEventListener('click', () => {
-        if (!activeCards.includes(thisCard.id)) {
+        if (flipConfirm === 'halt' && flipCheck === 1) {
+          flipCheck = 0;
+        }
+        if (
+          flipCheck === 1 &&
+          flipConfirm === 'go' &&
+          !activeCards.includes(thisCard.id)
+        ) {
           gameClicks++;
           if (gameClicks === 1) {
+            payCredits(difficulty);
             gameTimer = setInterval(() => {
               gameTime++;
+              document.querySelector('#seconds').textContent = gameTime;
+              document.querySelector('#clicks').textContent = gameClicks;
             }, 1000);
           }
           activeCards.push(thisCard.id);
@@ -284,13 +338,15 @@
         // Nomatch
         thisCard.src = cards[shuffled[thisId]];
         returnValue = [thisCard, 'nomatch'];
+        flipConfirm = 'halt';
         setTimeout(() => {
           lastCard[0].src = '../images/3-memory/undercover.svg';
           thisCard.src = '../images/3-memory/undercover.svg';
           activeCards = activeCards.filter(
             (id) => id !== lastCard[0].id && id !== thisCard.id
           );
-          flipCheck = true;
+          flipCheck = 1;
+          flipConfirm = 'go';
         }, timing);
         return returnValue;
       }
@@ -317,24 +373,28 @@
       activeCards.forEach((card) => {
         document
           .querySelector(`#${card}`)
-          .classList.add('bg-gray-900', 'border-yellow-500');
+          .classList.add('bg-gray-400', 'border-yellow-500');
         setTimeout(() => {
           document
             .querySelector(`#${card}`)
-            .classList.remove('bg-gray-900', 'border-yellow-500');
+            .classList.remove('bg-gray-400', 'border-yellow-500');
           document.querySelector(`#${card}`).classList.add('bg-white');
         }, 3000);
       });
 
-      // TODO: ADD COINS BASED ON TIME SPEND AND DIFFICULTY
-      // TODO: Show Message to user with gameClicks & Timer?
-      console.log(
-        `Congratulations, you won in ${gameTime} seconds and have clicked ${gameClicks} times`
-      );
+      // ADD COINS BASED ON TIME SPEND AND DIFFICULTY
+      const credits = addCredits(difficulty, gameClicks, gameTime);
+
+      // SHOW GAME TOTAL TIME & GAME TOTAL CLICKS
+      document.querySelector('#seconds').textContent = gameTime;
+      document.querySelector('#clicks').textContent = gameClicks;
+      document.querySelector(
+        '#message'
+      ).innerHTML = `Congratulations, you finished in <b>${gameTime} seconds</b>, clicked <b>${gameClicks} times</b> and earned <b>${credits} credits</b>!`;
     }
   }
 
-  // Reset game
+  // Restart game
   function restartGame() {
     // Generate new random cards
     shuffled = genRandCards();
@@ -348,11 +408,75 @@
     gameClicks = 0;
     //Reset gameTime
     gameTime = 0;
-    // Hide button
+    // Hide button Show dropdown
     document.querySelector(`#difficulty`).classList.remove('hidden');
     document.querySelector(`#difficulty`).classList.add('flex');
     document.querySelector(`#restart`).classList.remove('flex');
     document.querySelector(`#restart`).classList.add('hidden');
+    // Reset message
+    document.querySelector('#message').textContent = '';
+  }
+
+  // MANAGE CREDITS
+  function addCredits(difficulty, gameClicks, gameTime) {
+    const oldCredits = localStorage.getItem('credits');
+    let calc = gameClicks + gameTime;
+    let calcCredits;
+    switch (difficulty) {
+      case 'easy':
+        if (calc < 45) {
+          calcCredits = 15;
+        } else if (calc >= 45 && calc < 60) {
+          calcCredits = 10;
+        } else if (calc >= 60 && calc < 80) {
+          calcCredits = 5;
+        } else {
+          calcCredits = 1;
+        }
+        break;
+      case 'medium':
+        if (calc < 80) {
+          calcCredits = 75;
+        } else if (calc >= 80 && calc < 100) {
+          calcCredits = 50;
+        } else if (calc >= 100 && calc < 120) {
+          calcCredits = 25;
+        } else {
+          calcCredits = 10;
+        }
+        break;
+      case 'hard':
+        if (calc < 125) {
+          calcCredits = 150;
+        } else if (calc >= 125 && calc < 150) {
+          calcCredits = 100;
+        } else if (calc >= 150 && calc < 170) {
+          calcCredits = 50;
+        } else {
+          calcCredits = 25;
+        }
+        break;
+    }
+    localStorage.setItem('credits', Number(oldCredits) + calcCredits);
+    document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
+    return calcCredits;
+  }
+  function payCredits(difficulty) {
+    const oldCredits = localStorage.getItem('credits');
+    let calcCredits;
+    switch (difficulty) {
+      case 'easy':
+        calcCredits = 10;
+        break;
+      case 'medium':
+        calcCredits = 50;
+        break;
+      case 'hard':
+        calcCredits = 100;
+        break;
+    }
+    localStorage.setItem('credits', Number(oldCredits) - calcCredits);
+    document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
   }
 
   //
