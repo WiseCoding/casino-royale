@@ -92,13 +92,26 @@
       </div>
     </nav>
 
+    <!-- ASIDE -->
+    <aside
+      class="absolute flex justify-center w-screen transform -translate-x-1/2 transition duration-1000 ease-in-out hover:translate-x-2 hover:translate-y-2"
+    >
+      <div class="absolute border shadow rounded-lg bg-white text-white max-w-lg p-4 m-6">
+        <p id="info" class="">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque ex pariatur, a
+          quisquam perferendis saepe iure rem cupiditate cum dicta fuga corrupti in magni,
+          nobis enim facere veritatis asperiores quas.
+        </p>
+      </div>
+    </aside>
+
     <!-- MAIN -->
     <main>
       <!-- DIFFICULTY DROPDOWN / BUTTONS -->
       <div id="difficulty" class="flex justify-center m-6">
         <select
           title="Select the difficulty"
-          class="form-select block appearance-none w-4/6 sm:w-1/2 md:w-1/3 lg:max-w-sm px-10 py-2 font-medium text-sm text-center rounded-md shadow text-indigo-700 bg-yellow-500 hover:shadow-md focus:outline-none focus:text-indigo-800 transition duration-150 ease-in-out"
+          class="form-select block appearance-none w-4/6 sm:w-1/2 md:w-1/3 lg:max-w-sm px-10 py-2 font-medium text-sm text-center rounded-md shadow text-black bg-yellow-500 hover:shadow-md focus:outline-none transition duration-150 ease-in-out"
           onChange="<!-- setDifficulty(this.value) -->"
           aria-label="Selected tab"
         >
@@ -171,7 +184,7 @@
 
           <div class="mt-8 md:mt-0 md:order-1">
             <p class="text-center text-base leading-6 text-gray-500">
-              Have fun playing Memory game <span id="userName"></span>!
+              Good luck <span id="userName"></span>!
             </p>
           </div>
         </div>
