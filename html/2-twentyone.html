@@ -58,6 +58,66 @@
       </div>
     </header>
 
+    <!-- ASIDE -->
+    <aside>
+      <!-- INFO -->
+      <div
+        id="info"
+        title="Click for game info..."
+        class="absolute right-0 m-5 z-50 border border-transparent rounded-full hover:border-black"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="information-circle w-6 h-6"
+          style="--darkreader-inline-fill: currentColor;"
+          data-darkreader-inline-fill=""
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+
+      <!-- GAME INFO -->
+      <div
+        id="gameInfo"
+        class="hidden absolute justify-center transform w-full p-2 z-10 translate-y-10"
+      >
+        <div
+          class="bg-gray-900 text-white text-center border shadow-xl rounded-lg p-5 m-5 max-w-md max-h-screen text-opacity-75"
+        >
+          <p class="font-bold my-1">Twenty-One</p>
+          <hr />
+          <p class="my-3">
+            Click the "Play" button to start the action!
+          </p>
+
+          <ul class="list-outside my-5">
+            <li class="">Cost per game is <b>10</b> credits</li>
+            <li class="">Win: <b>+15</b> credits</li>
+            <li class="">Loss: <b>-15</b> credits</li>
+          </ul>
+
+          <p class="my-3">
+            The aim of the game is to get as close as possible to 21. If you go over 21,
+            you bust and lose. If both the computer and you are below 21, the one who is
+            closest to 21 wins the game.
+          </p>
+
+          <p class="my-3">
+            <b>Take</b> means that you want to take another card from the dealer.
+          </p>
+          <p class="my-3">
+            <b>Stand</b> means that you are happy with the cards you currently have in
+            hand, and that you want to stop.
+          </p>
+        </div>
+      </div>
+    </aside>
+
     <!-- NAV -->
     <nav>
       <div class="flex justify-center sm:hidden m-6">
@@ -189,7 +249,7 @@
             <!-- GITHUB -->
             <a
               title="View the source code!"
-              href="https://github.com/WiseCoding/casino-royale/blob/master/html/2-twentyone.html"
+              href="https://github.com/WiseCoding/casino-royale"
               class="ml-6 text-gray-400 hover:text-gray-500"
             >
               <span class="sr-only">GitHub</span>

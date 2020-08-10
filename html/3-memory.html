@@ -59,23 +59,81 @@
     </header>
 
     <!-- ASIDE -->
-    <aside
-      id="info"
-      class="hidden absolute md:flex justify-start w-screen transform -translate-x-40 translate-y-2 transition duration-300 ease-in-out hover:translate-x-1"
-    >
+    <aside>
+      <!-- STATS -->
       <div
-        id="infoDiv"
-        class="absolute border shadow rounded-lg bg-gray-100 text-black max-w-lg p-2 grid grid-cols-3 grid-rows-2 gap-2 hover:shadow-md hover:border-yellow-500 text-center"
+        id="statsBox"
+        class="hidden absolute md:flex justify-start w-screen transform -translate-x-40 translate-y-2 transition duration-300 ease-in-out hover:translate-x-1"
       >
-        <p
-          class="col-start-3 row-span-2 text-center transform -rotate-90 self-center font-bold"
+        <div
+          id="stats"
+          class="absolute border shadow rounded-lg bg-gray-100 text-black max-w-lg p-2 grid grid-cols-3 grid-rows-2 gap-2 hover:shadow-md hover:border-yellow-500 text-center"
         >
-          STATS
-        </p>
-        <p class="text-right row-start-1 col-start-1">Seconds</p>
-        <p id="seconds" class="text-orange-500 row-start-1 col-start-2">0</p>
-        <p class="text-right row-start-2 col-start-1">Clicks</p>
-        <p id="clicks" class="text-green-500 row-start-2 col-start-2">0</p>
+          <p
+            class="col-start-3 row-span-2 text-center transform -rotate-90 self-center font-bold"
+          >
+            STATS
+          </p>
+          <p class="text-right row-start-1 col-start-1">Seconds</p>
+          <p id="seconds" class="text-orange-500 row-start-1 col-start-2">0</p>
+          <p class="text-right row-start-2 col-start-1">Clicks</p>
+          <p id="clicks" class="text-green-500 row-start-2 col-start-2">0</p>
+        </div>
+      </div>
+
+      <!-- INFO -->
+      <div
+        id="info"
+        title="Click for game info..."
+        class="absolute right-0 m-5 z-50 border border-transparent rounded-full hover:border-black"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="information-circle w-6 h-6"
+          style="--darkreader-inline-fill: currentColor;"
+          data-darkreader-inline-fill=""
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+
+      <!-- GAME INFO -->
+      <div
+        id="gameInfo"
+        class="hidden absolute justify-center transform w-full p-2 z-10 translate-y-10"
+      >
+        <div
+          class="bg-gray-900 text-white text-center border shadow-xl rounded-lg p-5 m-5 max-w-md max-h-screen text-opacity-75"
+        >
+          <p class="font-bold my-1">Memory Game Info</p>
+          <hr />
+          <p class="my-3">
+            Select a difficulty & click a random card to start the game!
+          </p>
+
+          <ul class="list-outside my-5">
+            <li class="">Easy: <b>10</b> credits</li>
+            <li class="">Medium: <b>50</b> credits</li>
+            <li class="">Hard: <b>100</b> credits</li>
+            <li class="">8: <b>10</b> credits</li>
+            <li class="">24: <b>100</b> credits</li>
+            <li class="">28: <b>100</b> credits</li>
+          </ul>
+
+          <p class="my-3">
+            The harder the difficulty, the bigger the reward! Complete the game as fast as
+            possible, by using the least amount of clicks to gain the biggest rewards.
+          </p>
+          <p class="my-3">
+            The harder the difficulty, the faster the cards turn back. Superrrrr focus
+            needed!
+          </p>
+        </div>
       </div>
     </aside>
 
@@ -162,7 +220,6 @@
 
       <!-- CARD GENERATOR -->
       <div id="main" class="mx-1 sm:mx-2 md:mx-4 lg:mx-6"></div>
-
       <p id="message" class="text-center mx-4 my-2 text-gray-700"></p>
     </main>
 
@@ -179,7 +236,7 @@
               href="https://www.flaticon.com/authors/freepik"
               class="ml-6 text-gray-400 hover:text-gray-500"
             >
-              <span class="sr-only">GitHub</span>
+              <span class="sr-only">FlatIcon</span>
               <svg
                 class="h-6 w-6"
                 fill="none"
@@ -200,7 +257,7 @@
             <!-- GITHUB -->
             <a
               title="View the source code!"
-              href="https://github.com/WiseCoding/casino-royale/blob/master/html/3-memory.html"
+              href="https://github.com/WiseCoding/casino-royale"
               class="ml-6 text-gray-400 hover:text-gray-500"
             >
               <span class="sr-only">GitHub</span>

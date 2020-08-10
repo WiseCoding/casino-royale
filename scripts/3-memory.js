@@ -41,6 +41,7 @@
 
   // AUDIO FILES
   const audioBump = new Audio('../audio/bump.mp3');
+  const audioTick = new Audio('../audio/tick2.mp3');
   const audioShuffle = new Audio('../audio/shuffle.mp3');
   const audioCardflip = new Audio('../audio/cardflip.mp3');
   const audioSuccess = new Audio('../audio/success.mp3');
@@ -77,9 +78,36 @@
     audioShuffle.play();
   };
 
-  // INFO BOX //
-  document.querySelector('#infoDiv').onmouseenter = () => {
+  // STATS/INFO //
+  const stats = document.querySelector('#statsBox');
+  const info = document.querySelector('#info');
+  const gameInfo = document.querySelector('#gameInfo');
+  stats.onmouseenter = () => {
     audioBump.play();
+  };
+  stats.onclick = () => {
+    stats.classList.remove('-translate-x-40');
+    stats.classList.add('translate-x-1');
+    audioBump.play();
+    const interval = setInterval(() => {
+      stats.classList.remove('translate-x-1');
+      stats.classList.add('-translate-x-40');
+      console.log('lol');
+      clearInterval(interval);
+    }, 2500);
+  };
+  let infoClick = 1;
+  info.onclick = () => {
+    audioTick.play();
+    if (infoClick === 1) {
+      gameInfo.classList.remove('hidden');
+      gameInfo.classList.add('flex');
+      infoClick = 0;
+    } else {
+      gameInfo.classList.remove('flex');
+      gameInfo.classList.add('hidden');
+      infoClick = 1;
+    }
   };
 
   // ========= //

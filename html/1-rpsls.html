@@ -58,10 +58,60 @@
       </div>
     </header>
 
+    <!-- ASIDE -->
+    <aside>
+      <!-- INFO -->
+      <div
+        id="info"
+        title="Click for game info..."
+        class="absolute right-0 m-5 z-50 border border-transparent rounded-full hover:border-black"
+      >
+        <svg
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="information-circle w-6 h-6"
+          style="--darkreader-inline-fill: currentColor;"
+          data-darkreader-inline-fill=""
+        >
+          <path
+            fill-rule="evenodd"
+            d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+      </div>
+
+      <!-- GAME INFO -->
+      <div
+        id="gameInfo"
+        class="hidden absolute justify-center transform w-full p-2 z-10 translate-y-10"
+      >
+        <div
+          class="bg-gray-900 text-white text-center border shadow-xl rounded-lg p-5 m-5 max-w-md max-h-screen text-opacity-75"
+        >
+          <p class="font-bold my-1">Rock Paper Scissors Lizard Spock Info</p>
+          <hr />
+          <p class="my-3">
+            Choose your weapon to fight the computer in a the one and only Rock Paper
+            Scissors Lizard Spock game! Click a card below to start.
+          </p>
+
+          <ul class="list-outside my-5">
+            <li class="">Cost per game is <b>10</b> credits</li>
+            <li class="">Win: <b>+11</b> credits</li>
+            <li class="">Loss: <b>-9</b> credits</li>
+          </ul>
+
+          <p class="my-3">
+            The game is fast paced, go nuts!
+          </p>
+        </div>
+      </div>
+    </aside>
+
     <!-- NAV -->
     <nav>
       <div class="flex justify-center sm:hidden m-6">
-        <p class="absolute right-0 text-black text-xs">Navigate</p>
         <select
           title="Where do you want to navigate to?"
           class="form-select block appearance-none w-4/6 px-10 py-2 font-medium text-sm text-center rounded-md shadow text-indigo-700 bg-white hover:shadow-md focus:outline-none focus:text-indigo-800 transition duration-150 ease-in-out"
@@ -245,7 +295,7 @@
               href="https://www.flaticon.com/authors/smashicons"
               class="ml-6 text-gray-400 hover:text-gray-500"
             >
-              <span class="sr-only">GitHub</span>
+              <span class="sr-only">FlatIcon</span>
               <svg
                 class="h-6 w-6"
                 fill="none"
@@ -266,7 +316,7 @@
             <!-- GITHUB -->
             <a
               title="View the source code!"
-              href="https://github.com/WiseCoding/casino-royale/blob/master/html/1-rpsls.html"
+              href="https://github.com/WiseCoding/casino-royale"
               class="ml-6 text-gray-400 hover:text-gray-500"
             >
               <span class="sr-only">GitHub</span>

@@ -1,3 +1,21 @@
+// INFO //
+const audioTick = new Audio('../audio/tick2.mp3');
+const info = document.querySelector('#info');
+const gameInfo = document.querySelector('#gameInfo');
+let infoClick = 1;
+info.onclick = () => {
+  audioTick.play();
+  if (infoClick === 1) {
+    gameInfo.classList.remove('hidden');
+    gameInfo.classList.add('flex');
+    infoClick = 0;
+  } else {
+    gameInfo.classList.remove('flex');
+    gameInfo.classList.add('hidden');
+    infoClick = 1;
+  }
+};
+
 // Declaring global variables
 let startTime;
 let endTime;
