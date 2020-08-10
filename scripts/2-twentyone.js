@@ -74,17 +74,17 @@
   player.winnerSound = (option) => {
     switch (option) {
       case 1:
-        //Winner sound
-        var audio = new Audio('../audio/blackJack_win.mp3');
+        //Win sound
+        var audio = new Audio('../audio/win.mp3');
         break;
 
       case 2:
-        //Loose Sound
-        var audio = new Audio('../audio/lost.mp3');
+        //Lose Sound
+        var audio = new Audio('../audio/dead.mp3');
         break;
       case 3:
         //BlackJack
-        var audio = new Audio('../audio/blackJack_win.mp3');
+        var audio = new Audio('../audio/win.mp3');
         break;
     }
     audio.play();

@@ -10,15 +10,18 @@
     'cocktail',
     'crown',
     'cues',
+    'dart',
     'diamond',
     'dice',
     'gem',
     'glass',
     'gold',
     'grapes',
+    'heart',
     'man',
     'police',
     'purse',
+    'sack',
     'seven',
     'shoe',
     'shuffler',
@@ -46,192 +49,26 @@
   // STARTING VARIABLES AND STARTING GRID //
   // ==================================== //
   // Starting Variables
-  let difficulty = 'medium';
-  let cardAmount = 16;
-  let gameClicks = 0;
-  let gameTime = 0;
+  let difficulty;
+  let cardAmount;
+  let gameClicks;
+  let gameTime;
   let gameTimer;
+  let timing;
+  let shuffled;
+  let lastCard;
+  let activeCards;
   let flipCheck = 1;
   let flipConfirm = 'go';
-  let timing = 1000;
-  let shuffled = genRandCards();
-  let lastCard = [];
-  let activeCards = [];
 
-  generateGrid(cardAmount);
-  let allCards = document.querySelectorAll('.memoryCards');
-  allCards.forEach((thisCard) =>
-    thisCard.addEventListener('click', () => {
-      // When cards are no match, halt turning cards until they are turned again
-      if (flipConfirm === 'halt' && flipCheck === 1) {
-        flipCheck = 0;
-      }
-
-      // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
-      if (flipCheck === 1 && flipConfirm === 'go' && !activeCards.includes(thisCard.id)) {
-        audioCardflip.play();
-        gameClicks++;
-        // If first card is turned, start timer, stop timer when game is won
-        if (gameClicks === 1) {
-          payCredits(difficulty);
-          gameTimer = setInterval(() => {
-            gameTime++;
-            document.querySelector('#seconds').textContent = gameTime;
-            document.querySelector('#clicks').textContent = gameClicks;
-          }, 1000);
-        }
-        activeCards.push(thisCard.id);
-        lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-        gameCheck(cardAmount, activeCards, gameTime);
-      }
-    })
-  );
-
-  // ==== //
-  // EASY //
-  // ==== //
-  document.querySelector('#easy').onclick = () => {
-    audioShuffle.play();
-    // RESET TIMER
-    clearInterval(gameTimer);
-
-    // Starting Variables
-    difficulty = 'easy';
-    cardAmount = 12;
-    gameClicks = 0;
-    gameTime = 0;
-    timing = 1600;
-    shuffled = genRandCards();
-    lastCard = [];
-    activeCards = [];
-
-    generateGrid(cardAmount);
-    allCards = document.querySelectorAll('.memoryCards');
-    allCards.forEach((thisCard) =>
-      thisCard.addEventListener('click', () => {
-        if (flipConfirm === 'halt' && flipCheck === 1) {
-          flipCheck = 0;
-        }
-        if (
-          flipCheck === 1 &&
-          flipConfirm === 'go' &&
-          !activeCards.includes(thisCard.id)
-        ) {
-          audioCardflip.play();
-          gameClicks++;
-          if (gameClicks === 1) {
-            payCredits(difficulty);
-            gameTimer = setInterval(() => {
-              gameTime++;
-              document.querySelector('#seconds').textContent = gameTime;
-              document.querySelector('#clicks').textContent = gameClicks;
-            }, 1000);
-          }
-          activeCards.push(thisCard.id);
-          lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-          gameCheck(cardAmount, activeCards, gameTime);
-        }
-      })
-    );
-    restartGame();
-  };
-
-  // ====== //
-  // MEDIUM //
-  // ====== //
-  document.querySelector('#medium').onclick = () => {
-    audioShuffle.play();
-    // RESET TIMER
-    clearInterval(gameTimer);
-
-    // Starting Variables
-    difficulty = 'medium';
-    cardAmount = 16;
-    gameClicks = 0;
-    gameTime = 0;
-    timing = 1000;
-    shuffled = genRandCards();
-    lastCard = [];
-    activeCards = [];
-
-    generateGrid(cardAmount);
-    allCards = document.querySelectorAll('.memoryCards');
-    allCards.forEach((thisCard) =>
-      thisCard.addEventListener('click', () => {
-        if (flipConfirm === 'halt' && flipCheck === 1) {
-          flipCheck = 0;
-        }
-        if (
-          flipCheck === 1 &&
-          flipConfirm === 'go' &&
-          !activeCards.includes(thisCard.id)
-        ) {
-          audioCardflip.play();
-          gameClicks++;
-          if (gameClicks === 1) {
-            payCredits(difficulty);
-            gameTimer = setInterval(() => {
-              gameTime++;
-              document.querySelector('#seconds').textContent = gameTime;
-              document.querySelector('#clicks').textContent = gameClicks;
-            }, 1000);
-          }
-          activeCards.push(thisCard.id);
-          lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-          gameCheck(cardAmount, activeCards, gameTime);
-        }
-      })
-    );
-    restartGame();
-  };
-
-  // ==== //
-  // HARD //
-  // ==== //
-  document.querySelector('#hard').onclick = () => {
-    audioShuffle.play();
-    // RESET TIMER
-    clearInterval(gameTimer);
-
-    // Starting Variables
-    difficulty = 'hard';
-    cardAmount = 20;
-    gameClicks = 0;
-    gameTime = 0;
-    timing = 600;
-    shuffled = genRandCards();
-    lastCard = [];
-    activeCards = [];
-
-    generateGrid(cardAmount);
-    allCards = document.querySelectorAll('.memoryCards');
-    allCards.forEach((thisCard) =>
-      thisCard.addEventListener('click', () => {
-        if (flipConfirm === 'halt' && flipCheck === 1) {
-          flipCheck = 0;
-        }
-        if (
-          flipCheck === 1 &&
-          flipConfirm === 'go' &&
-          !activeCards.includes(thisCard.id)
-        ) {
-          gameClicks++;
-          if (gameClicks === 1) {
-            payCredits(difficulty);
-            gameTimer = setInterval(() => {
-              audioCardflip.play();
-              gameTime++;
-              document.querySelector('#seconds').textContent = gameTime;
-              document.querySelector('#clicks').textContent = gameClicks;
-            }, 1000);
-          }
-          activeCards.push(thisCard.id);
-          lastCard = flipCards(timing, shuffled, thisCard, lastCard);
-          gameCheck(cardAmount, activeCards, gameTime);
-        }
-      })
-    );
-    restartGame();
+  // ========== //
+  // DIFFICULTY //
+  // ========== //
+  setDifficulty('medium');
+  // SELECT DROPDOWN
+  document.querySelector('#diffSelect').onchange = () => {
+    const diff = document.querySelector('#diffSelect').value;
+    setDifficulty(diff);
   };
 
   // RESTART BUTTON //
@@ -283,6 +120,85 @@
     return input;
   }
 
+  // Initiate Game and set difficulty
+  function setDifficulty(diff) {
+    audioShuffle.play();
+    // RESET TIMER
+    clearInterval(gameTimer);
+
+    // Starting Variables
+    switch (diff) {
+      case 'easy-12':
+        difficulty = 'easy';
+        cardAmount = 12;
+        timing = 1600;
+        break;
+      case 'medium-16':
+        difficulty = 'medium';
+        cardAmount = 16;
+        timing = 1000;
+        break;
+      case 'hard-20':
+        difficulty = 'hard';
+        cardAmount = 20;
+        timing = 600;
+        break;
+      case '8':
+        difficulty = 'easy';
+        cardAmount = 8;
+        timing = 1000;
+        break;
+      case '24':
+        difficulty = 'hard';
+        cardAmount = 24;
+        timing = 600;
+        break;
+      case '28':
+        difficulty = 'hard';
+        cardAmount = 28;
+        timing = 600;
+        break;
+
+      default:
+        break;
+    }
+    gameClicks = 0;
+    gameTime = 0;
+    shuffled = genRandCards();
+    lastCard = [];
+    activeCards = [];
+
+    generateGrid(cardAmount);
+    allCards = document.querySelectorAll('.memoryCards');
+    allCards.forEach((thisCard) =>
+      thisCard.addEventListener('click', () => {
+        if (flipConfirm === 'halt' && flipCheck === 1) {
+          flipCheck = 0;
+        }
+        if (
+          flipCheck === 1 &&
+          flipConfirm === 'go' &&
+          !activeCards.includes(thisCard.id)
+        ) {
+          audioCardflip.play();
+          gameClicks++;
+          if (gameClicks === 1) {
+            payCredits(difficulty);
+            gameTimer = setInterval(() => {
+              gameTime++;
+              document.querySelector('#seconds').textContent = gameTime;
+              document.querySelector('#clicks').textContent = gameClicks;
+            }, 1000);
+          }
+          activeCards.push(thisCard.id);
+          lastCard = flipCards(timing, shuffled, thisCard, lastCard);
+          gameCheck(cardAmount, activeCards, gameTime);
+        }
+      })
+    );
+    restartGame();
+  }
+
   // Generates variable grid of random cards
   function generateGrid(cardAmount) {
     const main = document.querySelector('#main');
@@ -302,6 +218,9 @@
       case 6:
         cols = 3;
         rows = 2;
+      case 8:
+        cols = 4;
+        rows = 2;
         break;
       case 12:
         cols = 4;
@@ -318,6 +237,10 @@
       case 24:
         cols = 4;
         rows = 6;
+        break;
+      case 28:
+        cols = 4;
+        rows = 7;
         break;
     }
     const grid = `
