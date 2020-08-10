@@ -183,12 +183,7 @@
       credits += 10;
       localStorage.setItem('credits', credits);
       document.getElementById('credits').innerText = localStorage.getItem('credits');
-
-      // add points (change credits in local storage)
-      // update credits in ID "credits"
     } else if (outcome === 'LOSS') {
-      // deduct points (change credits in local storage)
-      // update credits in ID "credits"
       credits -= 10;
       localStorage.setItem('credits', credits);
       document.getElementById('credits').innerText = localStorage.getItem('credits');

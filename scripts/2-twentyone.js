@@ -22,23 +22,9 @@
   //******** Creating the object Card, that will be contain  the deck********
   //object:card
   var card = {
-    stick: ["heart", "spade", "club", "diamond"],
-    icon: ["♥", "♠", "♣", "♦"],
-    figure: [
-      "A",
-      "02",
-      "03",
-      "04",
-      "05",
-      "06",
-      "07",
-      "08",
-      "09",
-      "10",
-      "J",
-      "Q",
-      "K",
-    ],
+    stick: ['heart', 'spade', 'club', 'diamond'],
+    icon: ['♥', '♠', '♣', '♦'],
+    figure: ['A', '02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K'],
     value: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10],
   };
 
@@ -60,19 +46,19 @@
   //card -object -Method : view -- returns the card info
   card.paintCard = (viewCard, nodeFather, cardCover) => {
     let node = document.getElementById(nodeFather);
-    let imgCard = document.createElement("img");
+    let imgCard = document.createElement('img');
 
     //setting the card
     if (cardCover == 1) {
-      imgCard.src = "../images/2-twentyone/cardCover.jpg";
+      imgCard.src = '../images/2-twentyone/cardCover.jpg';
     } else {
       imgCard.src = viewCard.pic;
     }
     imgCard.id = `${viewCard.stick}_${viewCard.figure}`;
-    imgCard.style.width = "170px";
-    imgCard.style.height = "200px";
-    imgCard.style.padding = "5px";
-    imgCard.style.display = "inline-block";
+    imgCard.style.width = '170px';
+    imgCard.style.height = '200px';
+    imgCard.style.padding = '5px';
+    imgCard.style.display = 'inline-block';
     //Append Card
     node.appendChild(imgCard);
   };
@@ -90,16 +76,16 @@
     switch (option) {
       case 1:
         //Winner sound
-        var audio = new Audio("../resources/blackJack_win.mp3");
+        var audio = new Audio('../audio/blackJack_win.mp3');
         break;
 
       case 2:
         //Loose Sound
-        var audio = new Audio("../resources/blackJack_lost.mp3");
+        var audio = new Audio('../audio/blackJack_lost.mp3');
         break;
       case 3:
         //BlackJack
-        var audio = new Audio("../resources/blackJack_win.mp3");
+        var audio = new Audio('../audio/blackJack_win.mp3');
         break;
     }
     audio.play();
@@ -107,11 +93,9 @@
 
   //Function AddCredits
   player.addCredits = (newCredits) => {
-    const oldCredits = localStorage.getItem("credits");
-    localStorage.setItem("credits", Number(oldCredits) + newCredits);
-    document.querySelector("#credits").innerHTML = localStorage.getItem(
-      "credits"
-    );
+    const oldCredits = localStorage.getItem('credits');
+    localStorage.setItem('credits', Number(oldCredits) + newCredits);
+    document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
     if (newCredits > 0) {
       player.winnerSound(1); //winner
     } else {
@@ -161,7 +145,7 @@
       // Removing the card throwed
       theDeck.splice(indexCard, 1);
     } else {
-      console.log("Deck empty, Start propertly the game");
+      console.log('Deck empty, Start propertly the game');
     }
     return card;
   }; // End- throwCard -- deliver to player or house cards for the game
@@ -188,12 +172,7 @@
     riskA = 21 - house.handValue(handPlayed, 1);
 
     // if the hand has exactly 21, or more than 21. -- and evaluating the risk
-    if (
-      risk <= 0 ||
-      riskA <= 0 ||
-      (risk > 0 && risk <= 5) ||
-      (riskA > 0 && riskA <= 5)
-    ) {
+    if (risk <= 0 || riskA <= 0 || (risk > 0 && risk <= 5) || (riskA > 0 && riskA <= 5)) {
       holdOn = true;
     }
     return holdOn;
@@ -210,7 +189,7 @@
       if (!houseHoldOn) {
         let indexNewCard = house.hand.length;
         house.hand[indexNewCard] = house.throwCard(theDeck);
-        card.paintCard(house.hand[indexNewCard], "cardsHouse", 0);
+        card.paintCard(house.hand[indexNewCard], 'cardsHouse', 0);
       }
     }
   };
@@ -224,15 +203,13 @@
     house.pointsA = house.handValue(house.hand, 1);
 
     //impresion prueba
-    console.log("Player Hand");
+    console.log('Player Hand');
     console.table(player.hand);
 
-    console.log("House Hand");
+    console.log('House Hand');
     console.table(house.hand);
 
-    console.log(
-      `PLAYER: points=${player.points}; points As=${player.pointsA} `
-    );
+    console.log(`PLAYER: points=${player.points}; points As=${player.pointsA} `);
     console.log(`HOUSE: points=${house.points}; points As=${house.pointsA} `);
     //impresion prueba
 
@@ -267,16 +244,16 @@
       ) {
         if (player.points == house.points || player.pointsA == house.pointsA) {
           //dawn
-          console.log("Dawn #0");
-          document.getElementById("result").innerHTML = "<strong>Dawn</strong>";
+          console.log('Dawn #0');
+          document.getElementById('result').innerHTML = '<strong>Dawn</strong>';
         } else {
           //player wins
           player.winner = true;
           house.winner = false;
 
-          console.log("Player Wins #1");
-          document.getElementById("result").innerHTML =
-            "<strong>PLAYER</strong> Wins, " +
+          console.log('Player Wins #1');
+          document.getElementById('result').innerHTML =
+            '<strong>PLAYER</strong> Wins, ' +
             `You Earned <strong>${gambleCredits}</strong> Credits`;
           //Credits
           player.addCredits(gambleCredits);
@@ -285,13 +262,13 @@
         //house wins
         house.winner = true;
         player.winner = false;
-        document.getElementById("result").innerHTML =
-          "<strong>HOUSE</strong> Wins," +
+        document.getElementById('result').innerHTML =
+          '<strong>HOUSE</strong> Wins,' +
           `You lost <strong>${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
 
-        console.log("House Wins #2");
+        console.log('House Wins #2');
       }
     } else {
       if (player.winner == house.winner) {
@@ -299,26 +276,26 @@
         player.winner = false;
         house.player = false;
 
-        console.log("Both loose");
-        document.getElementById("result").innerHTML =
-          "<strong>BOTH</strong> Loose :(" +
+        console.log('Both loose');
+        document.getElementById('result').innerHTML =
+          '<strong>BOTH</strong> Loose :(' +
           ` ,You lost <strong>${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
       } else {
         if (player.winner) {
           house.winner = false;
-          document.getElementById("result").innerHTML =
-            "<strong>PLAYER</strong> Wins, " +
+          document.getElementById('result').innerHTML =
+            '<strong>PLAYER</strong> Wins, ' +
             `You Earned <strong>${gambleCredits}</strong> Credits`;
           //credits
           player.addCredits(gambleCredits);
-          console.log("Player Wins #3");
+          console.log('Player Wins #3');
         } else {
           player.winner = false;
-          console.log("House Wins #4");
-          document.getElementById("result").innerHTML =
-            "<strong>HOUSE</strong> Wins, " +
+          console.log('House Wins #4');
+          document.getElementById('result').innerHTML =
+            '<strong>HOUSE</strong> Wins, ' +
             `You lost <strong>${gambleCredits}</strong> Credits`;
           //credits
           player.addCredits(-gambleCredits);
@@ -358,11 +335,11 @@
 
     //Painting the cards - Player
     player.hand.forEach((hand) => {
-      card.paintCard(hand, "cardsPlayer", 0);
+      card.paintCard(hand, 'cardsPlayer', 0);
     });
 
     //Painting the cards - House
-    card.paintCard(house.hand[0], "cardsHouse", 0);
+    card.paintCard(house.hand[0], 'cardsHouse', 0);
 
     //Evaluate if  house or Player has BlackJack
     player.pointsA = house.handValue(player.hand, 1);
@@ -371,77 +348,78 @@
     if (house.pointsA == 21 && player.pointsA == 21) {
       //BlackJack Dawn
       //painting the second card of house
-      card.paintCard(house.hand[1], "cardsHouse", 0);
+      card.paintCard(house.hand[1], 'cardsHouse', 0);
 
       house.winner = true;
       player.winner = true;
 
-      document.getElementById("result").innerHTML =
-        "<strong>DAWN !! BlackJack</strong><br/> <strong>HOUSE</strong> wins, " +
+      document.getElementById('result').innerHTML =
+        '<strong>DAWN !! BlackJack</strong><br/> <strong>HOUSE</strong> wins, ' +
         ` you lost <strong>${gambleCredits}</strong> Credits`;
       //credits
       player.addCredits(-gambleCredits);
-      console.log("DAWN #BLackJack");
+      console.log('DAWN #BLackJack');
       return; //end of the game
     } else {
       if (house.pointsA == 21) {
         //House BlackJack
         //painting the second card of house
-        card.paintCard(house.hand[1], "cardsHouse", 0);
+        card.paintCard(house.hand[1], 'cardsHouse', 0);
         house.winner = true;
-        document.getElementById("result").innerHTML =
-          "<strong>BlackJack</strong><br/><strong>HOUSE</strong> Wins, " +
+        document.getElementById('result').innerHTML =
+          '<strong>BlackJack</strong><br/><strong>HOUSE</strong> Wins, ' +
           `You lost <strong>${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
-        console.log("HOUSE Wins #BLackJack");
+        console.log('HOUSE Wins #BLackJack');
         return; //end of the game
       } else if (player.pointsA == 21) {
         //Player BlackJack
         //painting the second card of house
-        card.paintCard(house.hand[1], "cardsHouse", 0);
+        card.paintCard(house.hand[1], 'cardsHouse', 0);
         player.winner = true;
-        document.getElementById("result").innerHTML =
-          "<strong>BlackJack</strong><br/><strong>PLAYER</strong> Wins, " +
+        document.getElementById('result').innerHTML =
+          '<strong>BlackJack</strong><br/><strong>PLAYER</strong> Wins, ' +
           `You Earned <strong>${gambleCredits}</strong> Credits`;
 
         //credits
         player.addCredits(gambleCredits);
-        console.log("PLAYER Wins #BLackJack");
+        console.log('PLAYER Wins #BLackJack');
         return; //End of the game
       }
     }
 
     //painting the second card of house
-    card.paintCard(house.hand[1], "cardsHouse", 1);
+    card.paintCard(house.hand[1], 'cardsHouse', 1);
 
-    console.log(
-      `PLAYER: points=${player.points}; points As=${player.pointsA} `
-    );
+    console.log(`PLAYER: points=${player.points}; points As=${player.pointsA} `);
     console.log(`HOUSE: points=${house.points}; points As=${house.pointsA} `);
   }
 
-  //Execution Secuence
+  //Execution Sequence
   //buttons
-  var btnGoPlay = document.getElementById("btnPlay");
-  var btnNewCard = document.getElementById("newCard");
-  var btnHoldOn = document.getElementById("holdOn");
+  var btnGoPlay = document.getElementById('btnPlay');
+  var btnNewCard = document.getElementById('newCard');
+  var btnHoldOn = document.getElementById('holdOn');
   //Divs
-  var cardsHouse = document.getElementById("cardsHouse");
-  var cardsPlayer = document.getElementById("cardsPlayer");
-  var optionsPlayer = document.getElementById("optionsPlayer");
+  var cardsHouse = document.getElementById('cardsHouse');
+  var cardsPlayer = document.getElementById('cardsPlayer');
+  var optionsPlayer = document.getElementById('optionsPlayer');
 
   //result
-  var targetResult = document.getElementById("result");
+  var targetResult = document.getElementById('result');
 
   //getting hide the buttons
-  optionsPlayer.style.visibility = "hidden";
+  optionsPlayer.style.visibility = 'hidden';
 
   btnGoPlay.onclick = () => {
+    const audioShuffle = new Audio('../audio/shuffle.mp3');
+    audioShuffle.play();
+
     //Cleaning the card Spaces
-    cardsHouse.innerHTML = "";
-    cardsPlayer.innerHTML = "";
-    targetResult.innerHTML = "";
+    cardsHouse.innerHTML = '';
+    cardsPlayer.innerHTML = '';
+    targetResult.innerHTML = '';
     //bet
     gambleCredits = 15;
     console.clear();
@@ -456,13 +434,13 @@
 
     twentyOne();
 
-    optionsPlayer.style.visibility = "visible";
+    optionsPlayer.style.visibility = 'visible';
     if (house.winner || player.winner) {
-      btnNewCard.style.visibility = "hidden";
-      btnHoldOn.style.visibility = "hidden";
+      btnNewCard.style.visibility = 'hidden';
+      btnHoldOn.style.visibility = 'hidden';
     } else {
-      btnNewCard.style.visibility = "visible";
-      btnHoldOn.style.visibility = "visible";
+      btnNewCard.style.visibility = 'visible';
+      btnHoldOn.style.visibility = 'visible';
     }
   };
 
@@ -470,17 +448,16 @@
     let newCardIndex = player.hand.length;
 
     player.hand[newCardIndex] = house.throwCard(theDeck);
-    card.paintCard(player.hand[newCardIndex], "cardsPlayer", 0);
+    card.paintCard(player.hand[newCardIndex], 'cardsPlayer', 0);
 
     if (house.handValue(player.hand, 0) >= 21) {
       //no more cards - Automatic Hold!
-      btnNewCard.style.visibility = "hidden";
-      btnHoldOn.style.visibility = "hidden";
+      btnNewCard.style.visibility = 'hidden';
+      btnHoldOn.style.visibility = 'hidden';
 
       //Discover the second card of House
-      document.getElementById(
-        `${house.hand[1].stick}_${house.hand[1].figure}`
-      ).src = house.hand[1].pic;
+      document.getElementById(`${house.hand[1].stick}_${house.hand[1].figure}`).src =
+        house.hand[1].pic;
 
       //Evaluate Winner
       house.getWinner();
@@ -489,9 +466,8 @@
 
   btnHoldOn.onclick = () => {
     //Discover the second card of House
-    document.getElementById(
-      `${house.hand[1].stick}_${house.hand[1].figure}`
-    ).src = house.hand[1].pic;
+    document.getElementById(`${house.hand[1].stick}_${house.hand[1].figure}`).src =
+      house.hand[1].pic;
 
     //Evaluate if house needs a newCard
     house.houseGetNewCard();
@@ -499,7 +475,7 @@
     //Evaluate Winner
     house.getWinner();
 
-    btnNewCard.style.visibility = "hidden";
-    btnHoldOn.style.visibility = "hidden";
+    btnNewCard.style.visibility = 'hidden';
+    btnHoldOn.style.visibility = 'hidden';
   };
 })();
