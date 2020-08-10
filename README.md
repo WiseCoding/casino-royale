@@ -39,33 +39,25 @@
 - [Tailwind](https://tailwindcss.com/)
 - [Markdown](https://www.markdownguide.org/)
 
+# Project Management 🔎
+
+[Jira Board](https://js-monks.atlassian.net/jira/software/projects/CR/boards/1) - [GitHub Projects](https://github.com/WiseCoding/casino-royale/projects/1)
+
+---
+
+| #   | What               | When    | Who            |
+| --- | ------------------ | ------- | -------------- |
+| #0  | Repo + LandingPage | Day 1-2 | Mattias        |
+| #1  | RPSLS (script)     | Day 1-2 | Victor - Ouna  |
+| #1  | RPSLS (design)     | Day 3   | Mattias - Ouna |
+| #2  | 21 (script)        | Day 3-8 | Victor - Ouna  |
+| #2  | 21 (design)        | Day 8   | Mattias - Ouna |
+| #3  | Memory (script)    | Day 4-7 | Mattias - Ouna |
+| #3  | Memory (design)    | Day 4-7 | Mattias - Ouna |
+| #4  | Blocks (script)    | Day 1-8 | Mausam         |
+| #4  | Blocks (design)    | Day 1-8 | Mausam         |
+
 # License 📎
 
 MIT License
 MIT © 2020
-
-# Project Management 🔎
-
-## [Jira Board](https://js-monks.atlassian.net/jira/software/projects/CR/boards/1)
-
-## [GitHub Projects](https://github.com/WiseCoding/casino-royale/projects/1)
-
----
-
-### WHAT:
-
----
-
-### WHY:
-
----
-
-### WHEN:
-
----
-
-### HOW:
-
----
-
-### WHO:
