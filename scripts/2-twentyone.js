@@ -5,7 +5,7 @@
 
   //SET USERNAME
   let userName = localStorage.getItem('username');
-  document.querySelector('#userName').textContent = userName.toLocaleUpperCase();
+  document.querySelector('#playerName').textContent = userName.toLocaleUpperCase();
 
   //Generate some random options
   generator = (min, max) => {
@@ -405,11 +405,14 @@
   var targetResult = document.getElementById('result');
 
   //getting hide the buttons
-  optionsPlayer.style.visibility = 'hidden';
+  optionsPlayer.classList.add('hidden');
 
   btnGoPlay.onclick = () => {
     const audioShuffle = new Audio('../audio/shuffle.mp3');
     audioShuffle.play();
+
+    //Hide button
+    btnGoPlay.classList.add('hidden');
 
     //Cleaning the card Spaces
     cardsHouse.innerHTML = '';
@@ -429,13 +432,11 @@
 
     twentyOne();
 
-    optionsPlayer.style.visibility = 'visible';
     if (house.winner || player.winner) {
-      btnNewCard.style.visibility = 'hidden';
-      btnHoldOn.style.visibility = 'hidden';
+      optionsPlayer.classList.add('hidden');
+      btnGoPlay.classList.remove('hidden');
     } else {
-      btnNewCard.style.visibility = 'visible';
-      btnHoldOn.style.visibility = 'visible';
+      optionsPlayer.classList.remove('hidden');
     }
   };
 
@@ -447,8 +448,8 @@
 
     if (house.handValue(player.hand, 0) >= 21) {
       //no more cards - Automatic Hold!
-      btnNewCard.style.visibility = 'hidden';
-      btnHoldOn.style.visibility = 'hidden';
+      optionsPlayer.classList.add('hidden');
+      btnGoPlay.classList.remove('hidden');
 
       //Discover the second card of House
       document.getElementById(`${house.hand[1].stick}_${house.hand[1].figure}`).src =
@@ -470,8 +471,8 @@
     //Evaluate Winner
     house.getWinner();
 
-    btnNewCard.style.visibility = 'hidden';
-    btnHoldOn.style.visibility = 'hidden';
+    optionsPlayer.classList.add('hidden');
+    btnGoPlay.classList.remove('hidden');
   };
 
   // TODO: ADD STARTING CARDS ON PAGE LOAD, BECODE CARD @ortegaVictorBe

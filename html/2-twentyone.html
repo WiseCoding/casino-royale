@@ -112,34 +112,45 @@
 
     <!-- MAIN -->
     <main class="w-full">
-      <div id="container" class="grid grid-cols-2 gap-2 m-4">
-        <div id="house" class="border shadow text-center">
-          <h2 style="font-weight: 700;">HOUSE</h2>
+      <div id="container" class="grid grid-cols-1 gap-2 m-4">
+        <div
+          id="house"
+          class="border shadow-lg text-center mx-auto bg-white rounded-lg p-3"
+        >
+          <h2 class="font-bold text-gray-700">HOUSE</h2>
           <div id="cardsHouse"></div>
         </div>
-        <div id="command" class="border shadow text-center">
-          <div>
-            <button
-              id="btnPlay"
-              class="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-black bg-yellow-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out"
-            >
-              START
-            </button>
-            <p id="result"></p>
-          </div>
+        <div id="command" class="text-center m-5">
+          <button
+            id="btnPlay"
+            class="inline-flex items-center px-4 py-2 m-1 border border-transparent shadow-md hover:shadow-lg hover:border-white text-sm leading-5 font-medium rounded-md text-black bg-yellow-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out"
+          >
+            PLAY
+          </button>
+
           <div id="optionsPlayer">
-            <button id="newCard" class="">
+            <button
+              id="newCard"
+              class="inline-flex items-center px-4 py-2 m-1 border border-transparent shadow-md hover:shadow-lg hover:border-white text-sm leading-5 font-medium rounded-md text-black bg-yellow-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out"
+            >
               TAKE
             </button>
-            <button id="holdOn" class="">
+            <button
+              id="holdOn"
+              class="inline-flex items-center px-4 py-2 m-1 border border-transparent shadow-md hover:shadow-lg hover:border-white text-sm leading-5 font-medium rounded-md text-black bg-yellow-500 hover:bg-indigo-400 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-600 active:bg-indigo-600 transition duration-150 ease-in-out"
+            >
               STAND
             </button>
           </div>
         </div>
-        <div id="player" class="border shadow text-center">
-          <h2 id="userName" class="font-bold">PLAYER</h2>
+        <div
+          id="player"
+          class="border shadow-lg text-center mx-auto bg-white rounded-lg p-3"
+        >
+          <h2 id="playerName" class="font-bold text-yellow-700">PLAYER</h2>
           <div id="cardsPlayer"></div>
         </div>
+        <p id="result" class="mt-5 text-center"></p>
       </div>
     </main>
 
