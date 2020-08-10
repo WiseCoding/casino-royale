@@ -396,10 +396,13 @@
   var btnGoPlay = document.getElementById('btnPlay');
   var btnNewCard = document.getElementById('newCard');
   var btnHoldOn = document.getElementById('holdOn');
+
   //Divs
   var cardsHouse = document.getElementById('cardsHouse');
   var cardsPlayer = document.getElementById('cardsPlayer');
   var optionsPlayer = document.getElementById('optionsPlayer');
+  const houseDiv = document.querySelector('#house');
+  const playerDiv = document.querySelector('#player');
 
   //result
   var targetResult = document.getElementById('result');
@@ -413,6 +416,9 @@
 
     //Hide button
     btnGoPlay.classList.add('hidden');
+    //Show player & house
+    houseDiv.classList.remove('hidden');
+    playerDiv.classList.remove('hidden');
 
     //Cleaning the card Spaces
     cardsHouse.innerHTML = '';
