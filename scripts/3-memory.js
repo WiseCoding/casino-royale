@@ -128,17 +128,17 @@
 
     // Starting Variables
     switch (diff) {
-      case 'easy-12':
+      case 'easy':
         difficulty = 'easy';
         cardAmount = 12;
         timing = 1600;
         break;
-      case 'medium-16':
+      case 'medium':
         difficulty = 'medium';
         cardAmount = 16;
         timing = 1000;
         break;
-      case 'hard-20':
+      case 'hard':
         difficulty = 'hard';
         cardAmount = 20;
         timing = 600;
