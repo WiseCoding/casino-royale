@@ -62,6 +62,7 @@
     <nav>
       <div class="flex justify-center sm:hidden m-6">
         <select
+          title="Where do you want to navigate to?"
           class="form-select block appearance-none mx-auto px-10 py-2 font-medium text-sm text-center rounded-md shadow text-indigo-700 bg-white hover:shadow-md focus:outline-none focus:text-indigo-800 transition duration-150 ease-in-out"
           onChange="window.location.href=this.value"
           aria-label="Selected tab"
@@ -111,8 +112,13 @@
     </nav>
 
     <!-- MAIN -->
-    <main>
-      <canvas id="canvas" width="700" height="500"></canvas>
+    <main class="">
+      <canvas
+        id="canvas"
+        class="text-center bg-gray-800 shadow-lg rounded-lg mx-auto"
+        width="700"
+        height="500"
+      ></canvas>
     </main>
 
     <!-- FOOTER -->

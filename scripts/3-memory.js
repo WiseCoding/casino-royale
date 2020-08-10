@@ -36,6 +36,12 @@
     cards.push(path);
   }
 
+  // AUDIO FILES
+  const audioBump = new Audio('../audio/bump.mp3');
+  const audioShuffle = new Audio('../audio/shuffle.mp3');
+  const audioCardflip = new Audio('../audio/cardflip.mp3');
+  const audioSuccess = new Audio('../audio/success.mp3');
+
   // ==================================== //
   // STARTING VARIABLES AND STARTING GRID //
   // ==================================== //
@@ -63,6 +69,7 @@
 
       // Check if card is clicked on and if so, don't do anything, also if there is a match, cant click card either
       if (flipCheck === 1 && flipConfirm === 'go' && !activeCards.includes(thisCard.id)) {
+        audioCardflip.play();
         gameClicks++;
         // If first card is turned, start timer, stop timer when game is won
         if (gameClicks === 1) {
@@ -84,6 +91,7 @@
   // EASY //
   // ==== //
   document.querySelector('#easy').onclick = () => {
+    audioShuffle.play();
     // RESET TIMER
     clearInterval(gameTimer);
 
@@ -109,6 +117,7 @@
           flipConfirm === 'go' &&
           !activeCards.includes(thisCard.id)
         ) {
+          audioCardflip.play();
           gameClicks++;
           if (gameClicks === 1) {
             payCredits(difficulty);
@@ -131,6 +140,7 @@
   // MEDIUM //
   // ====== //
   document.querySelector('#medium').onclick = () => {
+    audioShuffle.play();
     // RESET TIMER
     clearInterval(gameTimer);
 
@@ -156,6 +166,7 @@
           flipConfirm === 'go' &&
           !activeCards.includes(thisCard.id)
         ) {
+          audioCardflip.play();
           gameClicks++;
           if (gameClicks === 1) {
             payCredits(difficulty);
@@ -178,6 +189,7 @@
   // HARD //
   // ==== //
   document.querySelector('#hard').onclick = () => {
+    audioShuffle.play();
     // RESET TIMER
     clearInterval(gameTimer);
 
@@ -207,6 +219,7 @@
           if (gameClicks === 1) {
             payCredits(difficulty);
             gameTimer = setInterval(() => {
+              audioCardflip.play();
               gameTime++;
               document.querySelector('#seconds').textContent = gameTime;
               document.querySelector('#clicks').textContent = gameClicks;
@@ -221,11 +234,15 @@
     restartGame();
   };
 
-  // ======= //
-  // RESTART //
-  // ======= //
+  // RESTART BUTTON //
   document.querySelector('#restart').onclick = () => {
     restartGame();
+    audioShuffle.play();
+  };
+
+  // INFO BOX //
+  document.querySelector('#infoDiv').onmouseenter = () => {
+    audioBump.play();
   };
 
   // ========= //
@@ -313,11 +330,6 @@
     main.innerHTML = grid;
   }
 
-  // Game timer
-  function timer() {
-    gameTime++;
-  }
-
   // Card flip functionality
   function flipCards(timing, shuffled, thisCard, lastCard) {
     // Value that will be returned
@@ -333,12 +345,21 @@
         // Match
         thisCard.src = cards[shuffled[thisId]];
         returnValue = [thisCard, 'match'];
+        lastCard[0].classList.add('bg-green-400');
+        thisCard.classList.add('bg-green-400');
+        setTimeout(() => {
+          lastCard[0].classList.remove('bg-green-400');
+          thisCard.classList.remove('bg-green-400');
+        }, timing);
+
         return returnValue;
       } else {
         // Nomatch
         thisCard.src = cards[shuffled[thisId]];
         returnValue = [thisCard, 'nomatch'];
         flipConfirm = 'halt';
+        lastCard[0].classList.add('bg-red-400');
+        thisCard.classList.add('bg-red-400');
         setTimeout(() => {
           lastCard[0].src = '../images/3-memory/undercover.svg';
           thisCard.src = '../images/3-memory/undercover.svg';
@@ -347,6 +368,8 @@
           );
           flipCheck = 1;
           flipConfirm = 'go';
+          lastCard[0].classList.remove('bg-red-400');
+          thisCard.classList.remove('bg-red-400');
         }, timing);
         return returnValue;
       }
@@ -362,6 +385,7 @@
   function gameCheck(cardAmount, activeCards, gameTime) {
     // CHECK ACTIVE CARDS ARRAY LENGTH TO SEE IF GAME IS WON
     if (cardAmount === activeCards.length) {
+      audioSuccess.play();
       // RESET TIMER
       clearInterval(gameTimer);
       // HIDE DIFFICULTY & SHOW RESTART
@@ -371,13 +395,9 @@
       document.querySelector(`#restart`).classList.add('flex');
       // HIGHLIGHT ALL CARDS
       activeCards.forEach((card) => {
-        document
-          .querySelector(`#${card}`)
-          .classList.add('bg-gray-400', 'border-yellow-500');
+        document.querySelector(`#${card}`).classList.add('border-yellow-500');
         setTimeout(() => {
-          document
-            .querySelector(`#${card}`)
-            .classList.remove('bg-gray-400', 'border-yellow-500');
+          document.querySelector(`#${card}`).classList.remove('border-yellow-500');
           document.querySelector(`#${card}`).classList.add('bg-white');
         }, 3000);
       });
@@ -461,6 +481,7 @@
     document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
     return calcCredits;
   }
+
   function payCredits(difficulty) {
     const oldCredits = localStorage.getItem('credits');
     let calcCredits;

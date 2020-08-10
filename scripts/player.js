@@ -1,4 +1,12 @@
 (() => {
+  // AUDIO
+  let audioCoins;
+  if (document.URL.includes('index.html')) {
+    audioCoins = new Audio('audio/coins.mp3');
+  } else {
+    audioCoins = new Audio('../audio/coins.mp3');
+  }
+
   // LOGIN FUNCTIONALITY
   function getPlayer(startCredits) {
     let player = localStorage.getItem('username');
@@ -30,6 +38,7 @@
 
   // ADD CREDITS BUTTON
   document.querySelector('#addCredits').onclick = () => {
+    audioCoins.play();
     addCredits(100);
   };
 

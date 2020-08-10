@@ -3,6 +3,11 @@
   var theDeck = [];
   var gambleCredits = 0;
 
+  // AUDIO
+  const audioShuffle = new Audio('../audio/shuffle.mp3');
+  const audioWhoop = new Audio('../audio/whoop.mp3');
+  const audioBump = new Audio('../audio/bump.mp3');
+
   //SET USERNAME
   let userName = localStorage.getItem('username');
   document.querySelector('#playerName').textContent = userName.toLocaleUpperCase();
@@ -75,7 +80,7 @@
 
       case 2:
         //Loose Sound
-        var audio = new Audio('../audio/blackJack_lost.mp3');
+        var audio = new Audio('../audio/lost.mp3');
         break;
       case 3:
         //BlackJack
@@ -411,7 +416,6 @@
   optionsPlayer.classList.add('hidden');
 
   btnGoPlay.onclick = () => {
-    const audioShuffle = new Audio('../audio/shuffle.mp3');
     audioShuffle.play();
 
     //Hide button
@@ -447,6 +451,7 @@
   };
 
   btnNewCard.onclick = () => {
+    audioWhoop.play();
     let newCardIndex = player.hand.length;
 
     player.hand[newCardIndex] = house.throwCard(theDeck);
@@ -467,6 +472,7 @@
   };
 
   btnHoldOn.onclick = () => {
+    audioBump.play();
     //Discover the second card of House
     document.getElementById(`${house.hand[1].stick}_${house.hand[1].figure}`).src =
       house.hand[1].pic;
@@ -480,6 +486,4 @@
     optionsPlayer.classList.add('hidden');
     btnGoPlay.classList.remove('hidden');
   };
-
-  // TODO: ADD STARTING CARDS ON PAGE LOAD, BECODE CARD @ortegaVictorBe
 })();

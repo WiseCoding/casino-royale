@@ -62,6 +62,7 @@
     <nav>
       <div class="flex justify-center sm:hidden m-6">
         <select
+          title="Where do you want to navigate to?"
           class="form-select block appearance-none w-4/6 px-10 py-2 font-medium text-sm text-center rounded-md shadow text-indigo-700 bg-white hover:shadow-md focus:outline-none focus:text-indigo-800 transition duration-150 ease-in-out"
           onChange="window.location.href=this.value"
           aria-label="Selected tab"
@@ -111,7 +112,7 @@
     </nav>
 
     <!-- MAIN -->
-    <main class="w-full">
+    <main>
       <div id="container" class="grid grid-cols-1 gap-2 m-4">
         <div
           id="house"

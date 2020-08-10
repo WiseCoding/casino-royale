@@ -5,6 +5,9 @@
     return rndNumber;
   }
 
+  // AUDIO
+  const audioCardflip = new Audio('../audio/cardflip.mp3');
+
   // AVAILABLE OPTIONS
   let options = [
     {
@@ -72,67 +75,63 @@
     }
 
     // SET COMPUTER HTML
-    document.querySelector('#gameState').textContent = `${outcome}`;
     document.querySelector(
       '#computerImage'
     ).src = `../images/1-rpsls/${computerChoice}.svg`;
     document.querySelector('#computerChoice').textContent = `${choice}`;
 
+    const qMessage = document.querySelector('#message');
+    const qPlayerChoice = document.querySelector(`#${playerChoice.toLowerCase()}`);
+    const qComputerDiv = document.querySelector(`#computerDiv`);
+    const qComputerChoice = document.querySelector(`#computerChoice`);
+
     switch (outcome) {
       case 'WIN':
         state = 'halt';
-        document.querySelector('#message').innerHTML = `You <b>win 10</b> credits!`;
+        qMessage.innerHTML = `You <b>win 11</b> credits!`;
         // Add Color
-        document
-          .querySelector(`#${playerChoice.toLowerCase()}`)
-          .classList.add('bg-green-500');
-        document.querySelector(`#computerDiv`).classList.add('bg-green-500');
+        qPlayerChoice.classList.add('bg-green-500');
+        qPlayerChoice.classList.add('text-white');
+        qComputerDiv.classList.add('bg-green-500');
         // Remove Color
         setTimeout(() => {
-          document
-            .querySelector(`#${playerChoice.toLowerCase()}`)
-            .classList.remove('bg-green-500');
-          document.querySelector(`#computerDiv`).classList.remove('bg-green-500');
+          qPlayerChoice.classList.remove('bg-green-500');
+          qPlayerChoice.classList.remove('text-white');
+          qComputerDiv.classList.remove('bg-green-500');
           state = 'go';
         }, 1500);
         break;
 
       case 'LOSS':
         state = 'halt';
-        document.querySelector('#message').innerHTML = `You <b>lost 10</b> credits.`;
+        qMessage.innerHTML = `You <b>lost 9</b> credits.`;
         // Add Color
-        document
-          .querySelector(`#${playerChoice.toLowerCase()}`)
-          .classList.add('bg-red-500');
-        document.querySelector(`#computerDiv`).classList.add('bg-red-500');
+        qPlayerChoice.classList.add('bg-red-500');
+        qPlayerChoice.classList.add('text-white');
+        qComputerDiv.classList.add('bg-red-500');
         // Remove Color
         setTimeout(() => {
-          document
-            .querySelector(`#${playerChoice.toLowerCase()}`)
-            .classList.remove('bg-red-500');
-          document.querySelector(`#computerDiv`).classList.remove('bg-red-500');
+          qPlayerChoice.classList.remove('bg-red-500');
+          qPlayerChoice.classList.remove('text-white');
+          qComputerDiv.classList.remove('bg-red-500');
           state = 'go';
         }, 1500);
         break;
 
       case 'DRAW':
         state = 'halt';
-        document.querySelector('#message').innerHTML = `DRAW, try again.`;
+        qMessage.innerHTML = `It's a <b>draw</b>`;
         // Add Color
-        document
-          .querySelector(`#${playerChoice.toLowerCase()}`)
-          .classList.add('bg-yellow-500');
-        document.querySelector(`#computerDiv`).classList.add('bg-yellow-500');
-        document.querySelector(`#gameState`).classList.add('text-black');
-        document.querySelector(`#computerChoice`).classList.add('text-black');
+        qPlayerChoice.classList.add('bg-yellow-500');
+        qComputerDiv.classList.add('bg-yellow-500');
+        qMessage.classList.add('text-black');
+        qComputerChoice.classList.add('text-black');
         // Remove Color
         setTimeout(() => {
-          document
-            .querySelector(`#${playerChoice.toLowerCase()}`)
-            .classList.remove('bg-yellow-500');
-          document.querySelector(`#computerDiv`).classList.remove('bg-yellow-500');
-          document.querySelector(`#gameState`).classList.remove('text-black');
-          document.querySelector(`#computerChoice`).classList.remove('text-black');
+          qPlayerChoice.classList.remove('bg-yellow-500');
+          qComputerDiv.classList.remove('bg-yellow-500');
+          qMessage.classList.remove('text-black');
+          qComputerChoice.classList.remove('text-black');
           state = 'go';
         }, 1500);
         break;
@@ -142,6 +141,7 @@
   // CLICK HANDLERS
   document.querySelector('#rock').onclick = () => {
     if (state === 'go') {
+      audioCardflip.play();
       let userOption = 0;
       let machineOption = generator(0, 4);
       game(userOption, machineOption);
@@ -149,6 +149,7 @@
   };
   document.querySelector('#paper').onclick = () => {
     if (state === 'go') {
+      audioCardflip.play();
       let userOption = 1;
       let machineOption = generator(0, 4);
       game(userOption, machineOption);
@@ -156,6 +157,7 @@
   };
   document.querySelector('#scissors').onclick = () => {
     if (state === 'go') {
+      audioCardflip.play();
       let userOption = 2;
       let machineOption = generator(0, 4);
       game(userOption, machineOption);
@@ -163,6 +165,7 @@
   };
   document.querySelector('#lizard').onclick = () => {
     if (state === 'go') {
+      audioCardflip.play();
       let userOption = 3;
       let machineOption = generator(0, 4);
       game(userOption, machineOption);
@@ -170,6 +173,7 @@
   };
   document.querySelector('#spock').onclick = () => {
     if (state === 'go') {
+      audioCardflip.play();
       let userOption = 4;
       let machineOption = generator(0, 4);
       game(userOption, machineOption);
@@ -180,15 +184,13 @@
   function credits(outcome) {
     let credits = Number(localStorage.getItem('credits'));
     if (outcome === 'WIN') {
-      credits += 10;
+      credits += 11;
       localStorage.setItem('credits', credits);
       document.getElementById('credits').innerText = localStorage.getItem('credits');
     } else if (outcome === 'LOSS') {
-      credits -= 10;
+      credits -= 9;
       localStorage.setItem('credits', credits);
       document.getElementById('credits').innerText = localStorage.getItem('credits');
     }
   }
-
-  // TODO: Create think animation computer (shuffle through cards for a second)
 })();
