@@ -3,15 +3,9 @@
   var theDeck = [];
   var gambleCredits = 0;
 
-  // //Function AddCredits
-  // function addCredits(newCredits) {
-  //     const oldCredits = localStorage.getItem('credits');
-  //     localStorage.setItem('credits', Number(oldCredits) + newCredits);
-  //     document.querySelector('#credits').innerHTML = localStorage.getItem('credits');
-  //     if (newCredits > 0) {
-  //         player.winnerSound();
-  //     }
-  // }
+  //SET USERNAME
+  let userName = localStorage.getItem('username');
+  document.querySelector('#userName').textContent = userName.toLocaleUpperCase();
 
   //Generate some random options
   generator = (min, max) => {
@@ -244,17 +238,17 @@
       ) {
         if (player.points == house.points || player.pointsA == house.pointsA) {
           //dawn
-          console.log('Dawn #0');
-          document.getElementById('result').innerHTML = '<strong>Dawn</strong>';
+          console.log('Draw #0');
+          document.getElementById('result').innerHTML = `<strong>It's a draw.</strong>`;
         } else {
           //player wins
           player.winner = true;
           house.winner = false;
 
           console.log('Player Wins #1');
-          document.getElementById('result').innerHTML =
-            '<strong>PLAYER</strong> Wins, ' +
-            `You Earned <strong>${gambleCredits}</strong> Credits`;
+          document.getElementById(
+            'result'
+          ).innerHTML = `You win: <strong>+${gambleCredits}</strong> Credits`;
           //Credits
           player.addCredits(gambleCredits);
         }
@@ -262,9 +256,9 @@
         //house wins
         house.winner = true;
         player.winner = false;
-        document.getElementById('result').innerHTML =
-          '<strong>HOUSE</strong> Wins,' +
-          `You lost <strong>${gambleCredits}</strong> Credits`;
+        document.getElementById(
+          'result'
+        ).innerHTML = `You lose: <strong>-${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
 
@@ -277,26 +271,27 @@
         house.player = false;
 
         console.log('Both loose');
-        document.getElementById('result').innerHTML =
-          '<strong>BOTH</strong> Loose :(' +
-          ` ,You lost <strong>${gambleCredits}</strong> Credits`;
+        document.getElementById(
+          'result'
+        ).innerHTML = `It's a draw: <strong>-${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
       } else {
         if (player.winner) {
           house.winner = false;
-          document.getElementById('result').innerHTML =
-            '<strong>PLAYER</strong> Wins, ' +
-            `You Earned <strong>${gambleCredits}</strong> Credits`;
+          document.getElementById(
+            'result'
+          ).innerHTML = `You win: <strong>+${gambleCredits}</strong> Credits`;
           //credits
           player.addCredits(gambleCredits);
           console.log('Player Wins #3');
         } else {
           player.winner = false;
           console.log('House Wins #4');
-          document.getElementById('result').innerHTML =
-            '<strong>HOUSE</strong> Wins, ' +
-            `You lost <strong>${gambleCredits}</strong> Credits`;
+          document.getElementById(
+            'result'
+          ).innerHTML = `You lose: <strong>-${gambleCredits}</strong> Credits`;
+
           //credits
           player.addCredits(-gambleCredits);
         }
@@ -478,4 +473,6 @@
     btnNewCard.style.visibility = 'hidden';
     btnHoldOn.style.visibility = 'hidden';
   };
+
+  // TODO: ADD STARTING CARDS ON PAGE LOAD, BECODE CARD @ortegaVictorBe
 })();

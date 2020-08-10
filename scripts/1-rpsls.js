@@ -189,4 +189,6 @@
       document.getElementById('credits').innerText = localStorage.getItem('credits');
     }
   }
+
+  // TODO: Create think animation computer (shuffle through cards for a second)
 })();
