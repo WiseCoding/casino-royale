@@ -936,6 +936,14 @@ img {
   max-width: 42rem;
 }
 
+.max-w-3xl {
+  max-width: 48rem;
+}
+
+.max-w-5xl {
+  max-width: 64rem;
+}
+
 .max-w-screen-xl {
   max-width: 1280px;
 }
@@ -1381,8 +1389,20 @@ img {
     display: block;
   }
 
+  .sm\:flex {
+    display: flex;
+  }
+
   .sm\:hidden {
     display: none;
+  }
+
+  .sm\:flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .sm\:justify-center {
+    justify-content: center;
   }
 
   .sm\:text-3xl {
@@ -1396,6 +1416,11 @@ img {
   .sm\:mx-2 {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+  }
+
+  .sm\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .sm\:mt-4 {
@@ -1460,6 +1485,11 @@ img {
   .md\:mx-4 {
     margin-left: 1rem;
     margin-right: 1rem;
+  }
+
+  .md\:mx-auto {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .md\:mt-0 {
