@@ -221,7 +221,7 @@
     house.pointsA = house.handValue(house.hand, 1);
 
     //Calculating points - both
-    house.paintPoints(1)
+    house.paintPoints(1);
 
     //first testing for player - is the player not over the 21 - could be win .. for now
     if (player.pointsA <= 21) {
@@ -274,14 +274,12 @@
         ).innerHTML = `You lose: <strong>${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
-
       }
     } else {
       if (player.winner == house.winner) {
         //both loose
         player.winner = false;
         house.player = false;
-
 
         document.getElementById(
           'result'
@@ -313,49 +311,54 @@
 
   house.paintPoints = (both) => {
     if (both == 1) {
-      //House 
+      //House
       if (house.points != house.pointsA) {
         if (house.pointsA >= 0) {
-          document.getElementById("houseName").innerHTML = `HOUSE (Points ${house.points} or ${house.pointsA})`
+          document.getElementById(
+            'houseName'
+          ).innerHTML = `HOUSE (${house.points} or ${house.pointsA})`;
         } else {
-          document.getElementById("houseName").innerHTML = `HOUSE (Points ${house.points})`
+          document.getElementById('houseName').innerHTML = `HOUSE (${house.points})`;
         }
-
       } else {
-        document.getElementById("houseName").innerHTML = `HOUSE (Points ${house.points})`
-
+        document.getElementById('houseName').innerHTML = `HOUSE (${house.points})`;
       }
 
       //Player
       if (player.points != player.pointsA) {
         if (player.pointsA >= 0) {
-          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points} or ${player.pointsA})`
+          document.getElementById(
+            'playerName'
+          ).innerHTML = `${userName} (${player.points} or ${player.pointsA})`;
         } else {
-          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
+          document.getElementById(
+            'playerName'
+          ).innerHTML = `${userName} (${player.points})`;
         }
-
       } else {
-        document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
-
+        document.getElementById(
+          'playerName'
+        ).innerHTML = `${userName} (${player.points})`;
       }
-
     } else {
       //Player
       if (player.points != player.pointsA) {
         if (player.pointsA >= 0) {
-          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points} or ${player.pointsA})`
+          document.getElementById(
+            'playerName'
+          ).innerHTML = `${userName} (${player.points} or ${player.pointsA})`;
         } else {
-          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
+          document.getElementById(
+            'playerName'
+          ).innerHTML = `${userName} (${player.points})`;
         }
-
       } else {
-        document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
-
+        document.getElementById(
+          'playerName'
+        ).innerHTML = `${userName} (${player.points})`;
       }
-
     }
-
-  }
+  };
   //END house -object -Method : paintPoints -- Paint points beside of the player's name or house
   //End object:house
 
@@ -391,7 +394,6 @@
       card.paintCard(hand, 'cardsPlayer', 0);
     });
 
-
     //Painting the cards - House
     card.paintCard(house.hand[0], 'cardsHouse', 0);
 
@@ -403,7 +405,7 @@
     house.pointsA = house.handValue(house.hand, 1);
 
     //Calculating points - Player
-    house.paintPoints(0)
+    house.paintPoints(0);
 
     if (house.pointsA == 21 && player.pointsA == 21) {
       //BlackJack Dawn
@@ -411,7 +413,7 @@
       card.paintCard(house.hand[1], 'cardsHouse', 0);
 
       //Calculating points - Both
-      house.paintPoints(1)
+      house.paintPoints(1);
 
       house.winner = true;
       player.winner = true;
@@ -429,7 +431,7 @@
         //painting the second card of house
         card.paintCard(house.hand[1], 'cardsHouse', 0);
         //Calculating points - Both
-        house.paintPoints(1)
+        house.paintPoints(1);
 
         house.winner = true;
         document.getElementById('result').innerHTML =
@@ -443,7 +445,7 @@
         //painting the second card of house
         card.paintCard(house.hand[1], 'cardsHouse', 0);
         //Calculating points - both
-        house.paintPoints(1)
+        house.paintPoints(1);
         player.winner = true;
         document.getElementById('result').innerHTML =
           '<strong>BlackJack</strong><br/><strong>PLAYER</strong> Wins, ' +
@@ -491,8 +493,8 @@
     cardsHouse.innerHTML = '';
     cardsPlayer.innerHTML = '';
     targetResult.innerHTML = '';
-    document.getElementById("houseName").textContent = "HOUSE"
-    document.getElementById("playerName").textContent = userName;
+    document.getElementById('houseName').textContent = 'HOUSE';
+    document.getElementById('playerName').textContent = userName;
     //bet
     gambleCredits = 15;
 
@@ -521,8 +523,6 @@
     player.hand[newCardIndex] = house.throwCard(theDeck);
     card.paintCard(player.hand[newCardIndex], 'cardsPlayer', 0);
 
-
-
     if (house.handValue(player.hand, 0) >= 21) {
       //no more cards - Automatic Hold!
       optionsPlayer.classList.add('hidden');
@@ -536,11 +536,11 @@
       house.getWinner();
     }
 
-    player.points = house.handValue(player.hand, 0)
-    player.pointsA = house.handValue(player.hand, 1)
+    player.points = house.handValue(player.hand, 0);
+    player.pointsA = house.handValue(player.hand, 1);
 
     //Calculating points - Player
-    house.paintPoints(0)
+    house.paintPoints(0);
   };
 
   btnHoldOn.onclick = () => {
@@ -555,7 +555,7 @@
     //Evaluate Winner
     house.getWinner();
     //Calculating points - Player
-    house.paintPoints(1)
+    house.paintPoints(1);
 
     optionsPlayer.classList.add('hidden');
     btnGoPlay.classList.remove('hidden');
