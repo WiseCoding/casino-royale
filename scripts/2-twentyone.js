@@ -28,7 +28,8 @@
 
   //SET USERNAME
   let userName = localStorage.getItem('username');
-  document.querySelector('#playerName').textContent = userName.toLocaleUpperCase();
+  userName = userName.toLocaleUpperCase();
+  document.querySelector('#playerName').textContent = userName;
 
   //Generate some random options
   generator = (min, max) => {
@@ -219,16 +220,8 @@
     player.pointsA = house.handValue(player.hand, 1);
     house.pointsA = house.handValue(house.hand, 1);
 
-    //impresion prueba
-    console.log('Player Hand');
-    console.table(player.hand);
-
-    console.log('House Hand');
-    console.table(house.hand);
-
-    console.log(`PLAYER: points=${player.points}; points As=${player.pointsA} `);
-    console.log(`HOUSE: points=${house.points}; points As=${house.pointsA} `);
-    //impresion prueba
+    //Calculating points - both
+    house.paintPoints(1)
 
     //first testing for player - is the player not over the 21 - could be win .. for now
     if (player.pointsA <= 21) {
@@ -261,17 +254,14 @@
       ) {
         if (player.points == house.points || player.pointsA == house.pointsA) {
           //dawn
-          console.log('Draw #0');
           document.getElementById('result').innerHTML = `<strong>It's a draw.</strong>`;
         } else {
           //player wins
           player.winner = true;
           house.winner = false;
-
-          console.log('Player Wins #1');
           document.getElementById(
             'result'
-          ).innerHTML = `You win: <strong>+${gambleCredits}</strong> Credits`;
+          ).innerHTML = `You win: <strong>${gambleCredits}</strong> Credits`;
           //Credits
           player.addCredits(gambleCredits);
         }
@@ -281,11 +271,10 @@
         player.winner = false;
         document.getElementById(
           'result'
-        ).innerHTML = `You lose: <strong>-${gambleCredits}</strong> Credits`;
+        ).innerHTML = `You lose: <strong>${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
 
-        console.log('House Wins #2');
       }
     } else {
       if (player.winner == house.winner) {
@@ -293,10 +282,10 @@
         player.winner = false;
         house.player = false;
 
-        console.log('Both loose');
+
         document.getElementById(
           'result'
-        ).innerHTML = `It's a draw: <strong>-${gambleCredits}</strong> Credits`;
+        ).innerHTML = `It's a draw: <strong> you loose ${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
       } else {
@@ -307,13 +296,11 @@
           ).innerHTML = `You win: <strong>+${gambleCredits}</strong> Credits`;
           //credits
           player.addCredits(gambleCredits);
-          console.log('Player Wins #3');
         } else {
           player.winner = false;
-          console.log('House Wins #4');
           document.getElementById(
             'result'
-          ).innerHTML = `You lose: <strong>-${gambleCredits}</strong> Credits`;
+          ).innerHTML = `You lost: <strong>${gambleCredits}</strong> Credits`;
 
           //credits
           player.addCredits(-gambleCredits);
@@ -322,6 +309,54 @@
     }
   }; //END house -object -Method : winner -- Evaluate the winner and add points to player
 
+  //house -object -Method : paintPoints -- Paint points beside of the player's name or house
+
+  house.paintPoints = (both) => {
+    if (both == 1) {
+      //House 
+      if (house.points != house.pointsA) {
+        if (house.pointsA >= 0) {
+          document.getElementById("houseName").innerHTML = `HOUSE (Points ${house.points} or ${house.pointsA})`
+        } else {
+          document.getElementById("houseName").innerHTML = `HOUSE (Points ${house.points})`
+        }
+
+      } else {
+        document.getElementById("houseName").innerHTML = `HOUSE (Points ${house.points})`
+
+      }
+
+      //Player
+      if (player.points != player.pointsA) {
+        if (player.pointsA >= 0) {
+          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points} or ${player.pointsA})`
+        } else {
+          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
+        }
+
+      } else {
+        document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
+
+      }
+
+    } else {
+      //Player
+      if (player.points != player.pointsA) {
+        if (player.pointsA >= 0) {
+          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points} or ${player.pointsA})`
+        } else {
+          document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
+        }
+
+      } else {
+        document.getElementById("playerName").innerHTML = `${userName} (Points ${player.points})`
+
+      }
+
+    }
+
+  }
+  //END house -object -Method : paintPoints -- Paint points beside of the player's name or house
   //End object:house
 
   //******** Creating the object player, that will be contain  info about the player********
@@ -331,7 +366,7 @@
     theDeck = [];
     card.getDeck(theDeck);
     house.mixer(theDeck);
-    console.table(theDeck);
+    // console.table(theDeck);
 
     house.hand = [];
     house.holdOn = false;
@@ -356,17 +391,27 @@
       card.paintCard(hand, 'cardsPlayer', 0);
     });
 
+
     //Painting the cards - House
     card.paintCard(house.hand[0], 'cardsHouse', 0);
 
     //Evaluate if  house or Player has BlackJack
+    player.points = house.handValue(player.hand, 0);
+    house.points = house.handValue(house.hand, 0);
+
     player.pointsA = house.handValue(player.hand, 1);
     house.pointsA = house.handValue(house.hand, 1);
+
+    //Calculating points - Player
+    house.paintPoints(0)
 
     if (house.pointsA == 21 && player.pointsA == 21) {
       //BlackJack Dawn
       //painting the second card of house
       card.paintCard(house.hand[1], 'cardsHouse', 0);
+
+      //Calculating points - Both
+      house.paintPoints(1)
 
       house.winner = true;
       player.winner = true;
@@ -376,25 +421,29 @@
         ` you lost <strong>${gambleCredits}</strong> Credits`;
       //credits
       player.addCredits(-gambleCredits);
-      console.log('DAWN #BLackJack');
+
       return; //end of the game
     } else {
       if (house.pointsA == 21) {
         //House BlackJack
         //painting the second card of house
         card.paintCard(house.hand[1], 'cardsHouse', 0);
+        //Calculating points - Both
+        house.paintPoints(1)
+
         house.winner = true;
         document.getElementById('result').innerHTML =
           '<strong>BlackJack</strong><br/><strong>HOUSE</strong> Wins, ' +
           `You lost <strong>${gambleCredits}</strong> Credits`;
         //credits
         player.addCredits(-gambleCredits);
-        console.log('HOUSE Wins #BLackJack');
         return; //end of the game
       } else if (player.pointsA == 21) {
         //Player BlackJack
         //painting the second card of house
         card.paintCard(house.hand[1], 'cardsHouse', 0);
+        //Calculating points - both
+        house.paintPoints(1)
         player.winner = true;
         document.getElementById('result').innerHTML =
           '<strong>BlackJack</strong><br/><strong>PLAYER</strong> Wins, ' +
@@ -402,16 +451,12 @@
 
         //credits
         player.addCredits(gambleCredits);
-        console.log('PLAYER Wins #BLackJack');
         return; //End of the game
       }
     }
 
     //painting the second card of house
     card.paintCard(house.hand[1], 'cardsHouse', 1);
-
-    console.log(`PLAYER: points=${player.points}; points As=${player.pointsA} `);
-    console.log(`HOUSE: points=${house.points}; points As=${house.pointsA} `);
   }
 
   //Execution Sequence
@@ -446,9 +491,10 @@
     cardsHouse.innerHTML = '';
     cardsPlayer.innerHTML = '';
     targetResult.innerHTML = '';
+    document.getElementById("houseName").textContent = "HOUSE"
+    document.getElementById("playerName").textContent = userName;
     //bet
     gambleCredits = 15;
-    console.clear();
 
     // //Asking to player for how much wants to play
     // var bet = prompt("Hey (name) How much you want bet in this match?");
@@ -475,6 +521,8 @@
     player.hand[newCardIndex] = house.throwCard(theDeck);
     card.paintCard(player.hand[newCardIndex], 'cardsPlayer', 0);
 
+
+
     if (house.handValue(player.hand, 0) >= 21) {
       //no more cards - Automatic Hold!
       optionsPlayer.classList.add('hidden');
@@ -487,6 +535,12 @@
       //Evaluate Winner
       house.getWinner();
     }
+
+    player.points = house.handValue(player.hand, 0)
+    player.pointsA = house.handValue(player.hand, 1)
+
+    //Calculating points - Player
+    house.paintPoints(0)
   };
 
   btnHoldOn.onclick = () => {
@@ -500,6 +554,8 @@
 
     //Evaluate Winner
     house.getWinner();
+    //Calculating points - Player
+    house.paintPoints(1)
 
     optionsPlayer.classList.add('hidden');
     btnGoPlay.classList.remove('hidden');
