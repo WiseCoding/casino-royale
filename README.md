@@ -1,6 +1,6 @@
 # Casine Royal 🎲
 
-[**Live Version**](https://wisecoding.github.io/casino-royale/) - [Agile](https://js-monks.atlassian.net/jira/software/projects/CR/boards/1)
+[**Live Version**](https://mattiasbonte.github.io/casino-royale/) - [Agile](https://js-monks.atlassian.net/jira/software/projects/CR/boards/1)
 
 # Assignment 📝
 
@@ -30,7 +30,7 @@
 
 - [👨🏽‍💻Victor](https://github.com/ortegaVictorBe)
 - [👩🏻‍💻Oiuna](https://github.com/Ouna-Bilegma)
-- [👨🏼‍💻Mattias](https://github.com/WiseCoding/)
+- [👨🏼‍💻Mattias](https://github.com/mattiasbonte/)
 - [👨🏻‍💻Mausam](https://github.com/ErAsuratya)
 
 # Built with 🛠
